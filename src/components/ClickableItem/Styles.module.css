@@ -1,0 +1,42 @@
+.item {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 4px;
+  color: #cdcdcd;
+  
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.item:hover {
+  color: #fff;
+  background-color: #232323;
+}
+
+.withIcon {
+  padding-left: 10px;
+}
+
+.withIcon .inner {
+  padding-left: 8px;
+}
+
+.icon svg {
+  width: 14px;
+}
+
+.item svg path {
+  fill: #cdcdcd;
+}
+
+.inner {
+  display: block;
+  padding-left: 12px;
+  width: 100%;
+}
+
+.circle {
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
