@@ -1,0 +1,52 @@
+.li {
+  margin-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 4px;
+  color: #cdcdcd;
+  position: relative;
+}
+
+.li:hover {
+  color: #fff;
+  background-color: #232323;
+}
+
+.li p {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3px;
+  border-radius: 2px;
+
+  transform: translateY(-50%);
+
+  transition: background-color 0.3s ease-in-out;
+}
+.li p svg {
+  max-width: 100%;
+}
+
+.li p:hover {
+  background: #6e3630;
+}
+
+.li svg path {
+  fill: #fff;
+}
+
+.active {
+  color: #fff;
+  background-color: #232323;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.hot * {
+  color: #d10808;
+  font-weight: 700;
+}

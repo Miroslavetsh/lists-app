@@ -1,13 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
+import ListItemEntity from '../../../models/ListItemEntity'
 import { ClickableItemWithColoredCircle, ClickableItemWithIcon } from '../ClickableItem'
+import ListItem from '../ListItem'
 
 import styles from './Styles.module.css'
 
+const items: Array<ListItemEntity> = [
+  {
+    color: '#69314C',
+    href: '/hotlist',
+    text: 'Хотлист',
+    isHot: true,
+  },
+  {
+    color: '#28456C',
+    href: '/in-flat',
+    text: 'В квартиру',
+    isHot: false,
+  },
+  {
+    color: '#2B593F',
+    href: '/in-town',
+    text: 'В село',
+    isHot: false,
+  },
+  {
+    color: '#6E3630',
+    href: '/family',
+    text: 'Семейные',
+    isHot: false,
+  },
+]
+
 const Sidebar: React.FC = () => {
+  const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
-        <ClickableItemWithIcon text='Все Списки' href='/all-lists'>
+        <ClickableItemWithIcon
+          active={activeItemIndex === 0}
+          onClick={() => {
+            setActiveItemIndex(0)
+          }}
+          text='Все Списки'
+          href='/all-lists'>
           <svg
             width='18'
             height='18'
@@ -23,21 +60,19 @@ const Sidebar: React.FC = () => {
       </div>
 
       <ul className={styles.mid}>
-        <li>
-          <ClickableItemWithColoredCircle color='#69314C' text='Хотлист' href='/hotlist' />
-        </li>
-
-        <li>
-          <ClickableItemWithColoredCircle color='#28456C' text='В квартиру' href='/in-flat' />
-        </li>
-
-        <li>
-          <ClickableItemWithColoredCircle color='#2B593F' text='В село' href='/in-town' />
-        </li>
-
-        <li>
-          <ClickableItemWithColoredCircle color='#C9D1D3' text='Семейные' href='/family' />
-        </li>
+        {items.map(({ color, href, isHot, text }, index) => {
+          return (
+            <ListItem
+              onClick={() => setActiveItemIndex(index + 1)}
+              active={index + 1 === activeItemIndex}
+              key={text}
+              color={color}
+              text={text}
+              href={href}
+              isHot={isHot}
+            />
+          )
+        })}
       </ul>
 
       <div className={styles.bottom}>
