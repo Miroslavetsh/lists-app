@@ -76,8 +76,6 @@ h6 {
   font-weight: 400;
 }
 
-// Input placeholder
-
 input:focus::-webkit-input-placeholder {
   color: transparent;
 }
@@ -90,8 +88,6 @@ input:focus::-moz-placeholder {
 input:focus:-ms-input-placeholder {
   color: transparent;
 }
-
-// Textarea
 
 textarea:focus::-webkit-input-placeholder {
   color: transparent;
