@@ -131,43 +131,43 @@
   "colors": [
     {
       "id": 1,
-      "hex": "#C9D1D3",
-      "name": "grey"
+      "hex": "#252525",
+      "name": "black"
     },
     {
       "id": 2,
-      "hex": "#42B883",
+      "hex": "#2B593F",
       "name": "green"
     },
     {
       "id": 3,
-      "hex": "#64C4ED",
+      "hex": "#28456C",
       "name": "blue"
     },
     {
       "id": 4,
-      "hex": "#FFBBCC",
-      "name": "pink"
+      "hex": "#6E3630",
+      "name": "red"
     },
     {
       "id": 5,
-      "hex": "#B6E6BD",
-      "name": "lime"
+      "hex": "#854C1D",
+      "name": "orange"
     },
     {
       "id": 6,
-      "hex": "#C355F5",
+      "hex": "#69314C",
       "name": "purple"
     },
     {
       "id": 7,
-      "hex": "#110133",
-      "name": "black"
+      "hex": "#492F64",
+      "name": "violet"
     },
     {
       "id": 8,
-      "hex": "#FF6464",
-      "name": "red"
+      "hex": "#5A5A5A",
+      "name": "gray"
     }
   ]
 }

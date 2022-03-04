@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ListItemEntity from '../../../models/ListItemEntity'
-import { ClickableItemWithColoredCircle, ClickableItemWithIcon } from '../ClickableItem'
+import { ClickableItemWithIcon } from '../ClickableItem'
+import { AddListForm } from '../Form'
 import ListItem from '../ListItem'
 import Popup from '../Popup'
 
@@ -128,7 +129,7 @@ const Sidebar: React.FC = () => {
         </ClickableItemWithIcon>
 
         <Popup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
-          Modal window
+          <AddListForm />
         </Popup>
       </div>
     </div>
