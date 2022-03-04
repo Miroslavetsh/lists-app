@@ -43,13 +43,13 @@
       "isHot": false
     },
     {
-      "id": 7,
+      "id": 8,
       "name": "Список срочных дел",
       "colorId": 7,
       "isHot": true
     },
     {
-      "id": 8,
+      "id": 9,
       "name": "Хотлист",
       "colorId": 6,
       "isHot": true

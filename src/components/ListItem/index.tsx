@@ -11,10 +11,11 @@ type ListItemPropTypes<T> = T & {
   children?: React.ReactNode
   onClick?: MouseEventHandler<HTMLLIElement>
   title?: string
+  onRemove?: () => void
 }
 
 const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTypes>> = (props) => {
-  const { text, color, active, isHot, onClick, title } = props
+  const { text, color, active, isHot, onClick, title, onRemove } = props
 
   const classNames = [styles.li]
   active && classNames.push(styles.active)
@@ -25,10 +26,7 @@ const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTyp
       <ClickableItemWithColoredCircle text={isHot ? text + '🔥' : text} color={color} />
 
       {active && (
-        <p
-          onClick={(e) => {
-            e.preventDefault()
-          }}>
+        <p onClick={onRemove}>
           <svg
             width='11'
             height='11'

@@ -15,7 +15,7 @@ import styles from './Styles.module.css'
 
 const Sidebar: React.FC = () => {
   const [toDoItems, setToDoItems] = useState<Array<ToDoList>>(lists)
-  const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
+  const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
   const showAddListPopup = () => {
@@ -62,15 +62,22 @@ const Sidebar: React.FC = () => {
       <ul className={styles.mid}>
         {toDoItems
           .sort((a, b) => Number(b.isHot) - Number(a.isHot))
-          .map(({ name, isHot, colorId }, index) => {
+          .map(({ id, name, isHot, colorId }, index) => {
             const { hex } = colors.filter(({ id }) => id === colorId)[0]
             const text =
               name.length > MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH
                 ? name.slice(0, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH - 3) + '...'
                 : name
 
+            const onRemove = () => {
+              setActiveItemIndex(0)
+              toDoItems.splice(index, 1)
+              setToDoItems([...toDoItems])
+            }
+
             const Item = (
               <ListItem
+                onRemove={onRemove}
                 onClick={() => setActiveItemIndex(index + 1)}
                 active={index + 1 === activeItemIndex}
                 color={hex}
