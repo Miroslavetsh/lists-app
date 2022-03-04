@@ -70,7 +70,6 @@ const Sidebar: React.FC = () => {
                 : name
 
             const onRemove = () => {
-              setActiveItemIndex(0)
               toDoItems.splice(index, 1)
               setToDoItems([...toDoItems])
             }
