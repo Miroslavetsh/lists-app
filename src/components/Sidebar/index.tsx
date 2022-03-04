@@ -14,13 +14,9 @@ import { lists, colors } from '../../assets/imdb.json'
 import styles from './Styles.module.css'
 
 const Sidebar: React.FC = () => {
-  const [toDoItems, setToDoItems] = useState<Array<ToDoList>>([])
+  const [toDoItems, setToDoItems] = useState<Array<ToDoList>>(lists)
   const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
-
-  useEffect(() => {
-    setToDoItems(lists)
-  }, [toDoItems])
 
   const showAddListPopup = () => {
     setPopupAddListVisible(true)
@@ -117,7 +113,7 @@ const Sidebar: React.FC = () => {
         </ClickableItemWithIcon>
 
         <Popup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
-          <AddListForm />
+          <AddListForm items={toDoItems} setItems={setToDoItems} onAdd={hideAddListPopup} />
         </Popup>
       </div>
     </div>

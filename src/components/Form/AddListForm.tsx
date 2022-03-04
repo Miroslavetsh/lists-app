@@ -5,6 +5,7 @@ import { TextInput, CheckBoxInput } from '../Input'
 import Button from '../Button'
 
 import ListItemEntity from '../../models/ToDoList'
+import ToDoList from '../../models/ToDoList'
 import Color from '../../models/Color'
 import useDebounce from '../../utils/hooks/useDebounce'
 
@@ -15,7 +16,13 @@ import styles from './Styles.module.css'
 
 const COLORS: Array<Color> = colors
 
-const AddListForm: React.FC = () => {
+type AddListFormPropTypes = {
+  items: Array<ToDoList>
+  setItems: (items: Array<ToDoList>) => void
+  onAdd?: () => void
+}
+
+const AddListForm: React.FC<AddListFormPropTypes> = ({ items, setItems, onAdd }) => {
   const [activeColor, setActiveColor] = useState<number>(1)
 
   const [textValue, setTextValue] = useState<string>('')
@@ -43,10 +50,16 @@ const AddListForm: React.FC = () => {
   //   console.log(debouncedTextValue)
   // }, [debouncedTextValue])
 
+  //TODO: Сделать проверку совпадения имени чтобы избежать повторений
   const addList = (obj: ListItemEntity) => {
     if (obj.name.trim() === '') {
     } else {
-      console.log(obj)
+      setItems([...items, obj])
+      setActiveColor(1)
+      setIsHotChecked(false)
+      setTextValue('')
+
+      typeof onAdd === 'function' && onAdd()
     }
   }
 
@@ -101,6 +114,10 @@ const AddListForm: React.FC = () => {
       </Button>
     </Form>
   )
+}
+
+AddListForm.defaultProps = {
+  onAdd: () => {},
 }
 
 export default AddListForm
