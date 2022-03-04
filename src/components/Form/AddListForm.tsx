@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import { TextInput, CheckBoxInput } from '../Input'
+import { Form } from '.'
 import Button from '../Button'
-import Input from '../Input'
-import Form from './Form'
 
-import { colors } from '../../assets/imdb.json'
+import ListItemEntity from '../../models/ToDoList'
 import Color from '../../models/Color'
+import useDebounce from '../../utils/hooks/useDebounce'
+
+import { colors, lists } from '../../assets/imdb.json'
 
 import styles from './Styles.module.css'
 
@@ -13,9 +16,54 @@ const COLORS: Array<Color> = colors
 const AddList: React.FC = () => {
   const [activeColor, setActiveColor] = useState<number>(1)
 
+  const [textValue, setTextValue] = useState<string>('')
+  const [inputValid, setInputValid] = useState<boolean>(true)
+
+  const [isHotChecked, setIsHotChecked] = useState<boolean>(false)
+
+  const debouncedTextValue = useDebounce<string>(textValue, 500)
+
+  const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.trim() === '') {
+      setInputValid(false)
+      setTextValue('')
+    } else {
+      setInputValid(true)
+      setTextValue(event.target.value)
+    }
+  }
+
+  const handleIsHotChange = () => {
+    setIsHotChecked(!isHotChecked)
+  }
+
+  // useEffect(() => {
+  //   console.log(debouncedTextValue)
+  // }, [debouncedTextValue])
+
+  const addList = (obj: ListItemEntity) => {
+    if (obj.name.trim() === '') {
+    } else {
+      console.log(obj)
+    }
+  }
+
+  const inputTextPlaceholder = inputValid ? 'Название списка' : 'Введите корректое название'
+
   return (
     <Form>
-      <Input placeholder='Название списка' />
+      <TextInput
+        placeholder={inputTextPlaceholder}
+        value={textValue}
+        onChange={handleTextChange}
+        valid={inputValid}
+      />
+
+      <CheckBoxInput
+        checked={isHotChecked}
+        onChange={handleIsHotChange}
+        placeholder='Пометить как важный'
+      />
 
       <ul className={styles.ul}>
         {COLORS.map(({ id, name, hex }) => {
@@ -40,9 +88,12 @@ const AddList: React.FC = () => {
         color='#08D11C'
         type='button'
         onClick={() => {
-          /**
-           * addNewListItem
-           */
+          addList({
+            id: lists[lists.length - 1].id + 1,
+            name: debouncedTextValue,
+            colorId: activeColor,
+            isHot: isHotChecked,
+          })
         }}>
         Добавить
       </Button>
