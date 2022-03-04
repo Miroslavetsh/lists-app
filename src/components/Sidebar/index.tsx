@@ -84,13 +84,18 @@ const Sidebar: React.FC = () => {
             <ListItem
               onClick={() => setActiveItemIndex(index + 1)}
               active={index + 1 === activeItemIndex}
-              key={text}
               color={color}
               text={text}
               isHot={isHot}
             />
           )
-          return href ? <a href={href}>{Item}</a> : Item
+          return href ? (
+            <a key={text} href={href}>
+              {Item}
+            </a>
+          ) : (
+            <React.Fragment key={text}>{Item}</React.Fragment>
+          )
         })}
       </ul>
 
@@ -108,16 +113,16 @@ const Sidebar: React.FC = () => {
             <path
               d='M8 1V15'
               stroke='black'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
             <path
               d='M1 8H15'
               stroke='black'
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
             />
           </svg>
         </ClickableItemWithIcon>
