@@ -3,37 +3,56 @@
     {
       "id": 1,
       "name": "Продажи",
-      "colorId": 5
+      "colorId": 5,
+      "isHot": false
     },
     {
       "id": 2,
       "name": "Фронтенд",
-      "colorId": 4
+      "colorId": 4,
+      "isHot": false
     },
     {
       "id": 3,
       "name": "Фильмы и сериалы",
-      "colorId": 3
+      "colorId": 3,
+      "isHot": false
     },
     {
       "id": 4,
       "name": "Книги",
-      "colorId": 2
+      "colorId": 2,
+      "isHot": false
     },
     {
       "id": 5,
       "name": "Личное",
-      "colorId": 1
+      "colorId": 1,
+      "isHot": false
     },
     {
+      "id": 6,
       "name": "Спорт",
       "colorId": 3,
-      "id": 6
+      "isHot": false
     },
     {
+      "id": 7,
       "name": "Курс по ReactJS ToDo",
       "colorId": 7,
-      "id": 7
+      "isHot": false
+    },
+    {
+      "id": 7,
+      "name": "Список срочных дел",
+      "colorId": 7,
+      "isHot": true
+    },
+    {
+      "id": 8,
+      "name": "Хотлист",
+      "colorId": 6,
+      "isHot": true
     }
   ],
   "tasks": [
@@ -131,7 +150,7 @@
   "colors": [
     {
       "id": 1,
-      "hex": "#252525",
+      "hex": "#111",
       "name": "black"
     },
     {

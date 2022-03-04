@@ -1,6 +1,6 @@
 export default interface ListItemEntity {
-  color:string
-  text: string
+  id: number
+  colorId: number
+  name: string
   isHot: boolean
-  href: string
 }

@@ -10,17 +10,18 @@ type ListItemPropTypes<T> = T & {
   isHot?: boolean
   children?: React.ReactNode
   onClick?: MouseEventHandler<HTMLLIElement>
+  title?: string
 }
 
 const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTypes>> = (props) => {
-  const { text, color, active, isHot, onClick } = props
+  const { text, color, active, isHot, onClick, title } = props
   const classNames = [styles.li]
 
   active && classNames.push(styles.active)
   isHot && classNames.push(styles.hot)
 
   return (
-    <li onClick={onClick} className={classNames.join(' ')}>
+    <li title={title} onClick={onClick} className={classNames.join(' ')}>
       <ClickableItemWithColoredCircle text={isHot ? text + '🔥' : text} color={color} />
 
       {active && (

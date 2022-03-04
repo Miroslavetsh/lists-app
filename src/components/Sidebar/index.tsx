@@ -1,42 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import ListItemEntity from '../../../models/ListItemEntity'
+import ToDoList from '../../models/ToDoList'
 import { ClickableItemWithIcon } from '../ClickableItem'
 import { AddListForm } from '../Form'
 import ListItem from '../ListItem'
 import Popup from '../Popup'
 
-import styles from './Styles.module.css'
+import { lists, colors } from '../../assets/imdb.json'
 
-const items: Array<ListItemEntity> = [
-  {
-    color: '#69314C',
-    href: '/hotlist',
-    text: 'Хотлист',
-    isHot: true,
-  },
-  {
-    color: '#28456C',
-    href: '/in-flat',
-    text: 'В квартиру',
-    isHot: false,
-  },
-  {
-    color: '#2B593F',
-    href: '/in-town',
-    text: 'В село',
-    isHot: false,
-  },
-  {
-    color: '#6E3630',
-    href: '/family',
-    text: 'Семейные',
-    isHot: false,
-  },
-]
+import styles from './Styles.module.css'
+import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
 
 const Sidebar: React.FC = () => {
+  const [toDoItems, setToDoItems] = useState<Array<ToDoList>>([])
   const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
+
+  useEffect(() => {
+    setToDoItems(lists)
+  }, [toDoItems])
 
   const showAddListPopup = () => {
     setPopupAddListVisible(true)
@@ -57,7 +38,7 @@ const Sidebar: React.FC = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
-        <a href='/all-lists'>
+        <a href='/'>
           <ClickableItemWithIcon
             active={activeItemIndex === 0}
             onClick={() => {
@@ -80,24 +61,28 @@ const Sidebar: React.FC = () => {
       </div>
 
       <ul className={styles.mid}>
-        {items.map(({ color, href, isHot, text }, index) => {
-          const Item = (
-            <ListItem
-              onClick={() => setActiveItemIndex(index + 1)}
-              active={index + 1 === activeItemIndex}
-              color={color}
-              text={text}
-              isHot={isHot}
-            />
-          )
-          return href ? (
-            <a key={text} href={href}>
-              {Item}
-            </a>
-          ) : (
-            <React.Fragment key={text}>{Item}</React.Fragment>
-          )
-        })}
+        {toDoItems
+          .sort((a, b) => Number(b.isHot) - Number(a.isHot))
+          .map(({ name, isHot, colorId }, index) => {
+            const { hex } = colors.filter(({ id }) => id === colorId)[0]
+            const text =
+              name.length > MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH
+                ? name.slice(0, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH - 3) + '...'
+                : name
+
+            const Item = (
+              <ListItem
+                onClick={() => setActiveItemIndex(index + 1)}
+                active={index + 1 === activeItemIndex}
+                color={hex}
+                text={text}
+                isHot={isHot}
+                title={name}
+              />
+            )
+
+            return <React.Fragment key={name}>{Item}</React.Fragment>
+          })}
       </ul>
 
       <div id='add-list-popup-parent'>

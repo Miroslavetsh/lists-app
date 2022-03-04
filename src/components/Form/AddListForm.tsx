@@ -4,7 +4,7 @@ import Input from '../Input'
 import Form from './Form'
 
 import { colors } from '../../assets/imdb.json'
-import Color from '../../../models/Color'
+import Color from '../../models/Color'
 
 import styles from './Styles.module.css'
 

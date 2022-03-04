@@ -1,0 +1,1 @@
+export const MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH = 15
