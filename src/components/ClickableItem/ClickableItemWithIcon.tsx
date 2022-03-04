@@ -19,7 +19,7 @@ const ClickableItemWithIcon: React.FC<ClickableItemWithIconProps> = (props) => {
   active && itemStyles.push(styles.active)
 
   return (
-    <div className={itemStyles.join(' ')}>
+    <div onClick={onClick} className={itemStyles.join(' ')}>
       <p className={styles.icon}>{children}</p>
 
       <ClickableItem text={text} href={href} />

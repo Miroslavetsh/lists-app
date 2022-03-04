@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ListItemEntity from '../../../models/ListItemEntity'
 import { ClickableItemWithColoredCircle, ClickableItemWithIcon } from '../ClickableItem'
 import ListItem from '../ListItem'
+import Popup from '../Popup'
 
 import styles from './Styles.module.css'
 
@@ -34,6 +35,23 @@ const items: Array<ListItemEntity> = [
 
 const Sidebar: React.FC = () => {
   const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
+  const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
+
+  const showAddListPopup = () => {
+    setPopupAddListVisible(true)
+  }
+
+  const hideAddListPopup = () => {
+    setPopupAddListVisible(false)
+  }
+
+  const togglePopupVisible = () => {
+    if (popupAddListVisible) {
+      hideAddListPopup()
+    } else {
+      showAddListPopup()
+    }
+  }
 
   return (
     <div className={styles.sidebar}>
@@ -75,8 +93,11 @@ const Sidebar: React.FC = () => {
         })}
       </ul>
 
-      <div className={styles.bottom}>
-        <ClickableItemWithIcon className={styles.add} text='Добавить список'>
+      <div id='add-list-popup-parent'>
+        <ClickableItemWithIcon
+          onClick={togglePopupVisible}
+          className={styles.add}
+          text='Добавить список'>
           <svg
             width='16'
             height='16'
@@ -99,6 +120,10 @@ const Sidebar: React.FC = () => {
             />
           </svg>
         </ClickableItemWithIcon>
+
+        <Popup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
+          Modal window
+        </Popup>
       </div>
     </div>
   )
