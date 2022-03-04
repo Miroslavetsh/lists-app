@@ -1,5 +1,4 @@
 import React, { ChangeEvent } from 'react'
-import Input, { InputPropTypes } from './TextInput'
 
 // import styles from './Styles.module.css'
 

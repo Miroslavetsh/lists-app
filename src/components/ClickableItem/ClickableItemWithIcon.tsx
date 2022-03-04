@@ -1,5 +1,7 @@
 import React, { MouseEventHandler } from 'react'
-import ClickableItem, { ClickableItemPropTypes } from './ClickableItem'
+
+import { ClickableItem } from '.'
+import { ClickableItemPropTypes } from './ClickableItem'
 
 import styles from './Styles.module.css'
 
@@ -13,13 +15,13 @@ type ClickableItemWithIconProps = ClickableItemPropTypes & {
 const ClickableItemWithIcon: React.FC<ClickableItemWithIconProps> = (props) => {
   const { children, text, className, active, onClick } = props
 
-  const itemStyles = [styles.item, styles.withIcon]
+  const classNames = [styles.item, styles.withIcon]
 
-  className && itemStyles.push(className)
-  active && itemStyles.push(styles.active)
+  className && classNames.push(className)
+  active && classNames.push(styles.active)
 
   return (
-    <div onClick={onClick} className={itemStyles.join(' ')}>
+    <div onClick={onClick} className={classNames.join(' ')}>
       <p className={styles.icon}>{children}</p>
 
       <ClickableItem text={text} />

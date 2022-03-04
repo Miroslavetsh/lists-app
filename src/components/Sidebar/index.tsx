@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import ToDoList from '../../models/ToDoList'
+
 import { ClickableItemWithIcon } from '../ClickableItem'
 import { AddListForm } from '../Form'
 import ListItem from '../ListItem'
 import Popup from '../Popup'
 
+import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
+import ToDoList from '../../models/ToDoList'
+
+// TODO: Переписать на фетч
 import { lists, colors } from '../../assets/imdb.json'
 
 import styles from './Styles.module.css'
-import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
 
 const Sidebar: React.FC = () => {
   const [toDoItems, setToDoItems] = useState<Array<ToDoList>>([])

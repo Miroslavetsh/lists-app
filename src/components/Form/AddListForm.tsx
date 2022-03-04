@@ -1,19 +1,21 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import { TextInput, CheckBoxInput } from '../Input'
+import React, { ChangeEvent, useState } from 'react'
+
 import { Form } from '.'
+import { TextInput, CheckBoxInput } from '../Input'
 import Button from '../Button'
 
 import ListItemEntity from '../../models/ToDoList'
 import Color from '../../models/Color'
 import useDebounce from '../../utils/hooks/useDebounce'
 
+// FIXME: переписать на бэкенд и делать фетч запрос
 import { colors, lists } from '../../assets/imdb.json'
 
 import styles from './Styles.module.css'
 
 const COLORS: Array<Color> = colors
 
-const AddList: React.FC = () => {
+const AddListForm: React.FC = () => {
   const [activeColor, setActiveColor] = useState<number>(1)
 
   const [textValue, setTextValue] = useState<string>('')
@@ -101,4 +103,4 @@ const AddList: React.FC = () => {
   )
 }
 
-export default AddList
+export default AddListForm

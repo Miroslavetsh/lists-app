@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, MouseEvent, useEffect, useRef, useState } from 'react'
+import React, { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import 'wicg-inert'
 
 import Portal from '../Portal'

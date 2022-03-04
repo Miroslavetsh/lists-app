@@ -1,4 +1,4 @@
-import React, { ChangeEvent, HTMLInputTypeAttribute, SyntheticEvent } from 'react'
+import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react'
 
 import styles from './Styles.module.css'
 
