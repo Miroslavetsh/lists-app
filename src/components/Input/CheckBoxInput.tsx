@@ -12,6 +12,8 @@ type CheckboxPropTypes = {
 const CheckBox: React.FC<CheckboxPropTypes> = (props) => {
   const { checked, onChange, placeholder } = props
 
+  // TODO: Сделать красивый чекбокс и когда он нажат сделать красным шрифт
+  // и огонёк после чтобы было понятно, что это такое
   return (
     <label>
       <input type='checkbox' checked={checked} onChange={onChange} />
