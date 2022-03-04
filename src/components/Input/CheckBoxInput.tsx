@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 
-// import styles from './Styles.module.css'
+import styles from './Styles.module.css'
 
 type CheckboxPropTypes = {
   checked: boolean
@@ -11,13 +11,13 @@ type CheckboxPropTypes = {
 const CheckBox: React.FC<CheckboxPropTypes> = (props) => {
   const { checked, onChange, placeholder } = props
 
-  // TODO: Сделать красивый чекбокс и когда он нажат сделать красным шрифт
-  // и огонёк после чтобы было понятно, что это такое
+  const classNames = [styles.label]
+
   return (
-    <label>
+    <label className={classNames.join('')}>
       <input type='checkbox' checked={checked} onChange={onChange} />
 
-      <span>{placeholder}</span>
+      <span>{checked ? placeholder + '🔥' : placeholder}</span>
     </label>
   )
 }

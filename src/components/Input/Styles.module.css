@@ -14,8 +14,59 @@
 }
 
 .notValid {
-  outline: 1px solid red;
+  outline: 1px solid #d10808;
 }
+
 .notValid::placeholder {
-  color: red;
+  color: #d10808;
+}
+
+.label {
+  cursor: pointer;
+  padding-left: 28px;
+}
+
+.label input {
+  display: none;
+}
+
+.label input:checked + span {
+  color: #d10808;
+  font-weight: 500;
+}
+
+.label span {
+  position: relative;
+}
+
+.label span:before,
+.label span:after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: -18px;
+  top: 50%;
+
+  border: 2px solid #fff;
+
+  border-radius: 4px;
+
+  transform: translate(-50%, -50%);
+}
+
+.label span:before {
+  width: 10px;
+  height: 10px;
+
+  display: none;
+
+  border-radius: 2px;
+
+  background: #fff;
+  left: -18px;
+}
+
+.label input:checked + span:before {
+  display: block;
 }
