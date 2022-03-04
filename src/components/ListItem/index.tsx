@@ -13,7 +13,7 @@ type ListItemPropTypes<T> = T & {
 }
 
 const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTypes>> = (props) => {
-  const { href, text, color, active, isHot, onClick } = props
+  const { text, color, active, isHot, onClick } = props
   const classNames = [styles.li]
 
   active && classNames.push(styles.active)
@@ -21,7 +21,7 @@ const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTyp
 
   return (
     <li onClick={onClick} className={classNames.join(' ')}>
-      <ClickableItemWithColoredCircle href={href} text={isHot ? text + '🔥' : text} color={color} />
+      <ClickableItemWithColoredCircle text={isHot ? text + '🔥' : text} color={color} />
 
       {active && (
         <p>

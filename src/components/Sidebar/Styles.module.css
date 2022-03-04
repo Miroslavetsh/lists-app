@@ -21,6 +21,11 @@
   cursor: pointer;
 }
 
+.add svg {
+  width: 10px;
+  height: 10px;
+}
+
 .add svg path {
   stroke: #868686;
 

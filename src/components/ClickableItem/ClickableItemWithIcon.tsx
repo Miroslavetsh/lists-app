@@ -11,7 +11,7 @@ type ClickableItemWithIconProps = ClickableItemPropTypes & {
 }
 
 const ClickableItemWithIcon: React.FC<ClickableItemWithIconProps> = (props) => {
-  const { children, text, href, className, active, onClick } = props
+  const { children, text, className, active, onClick } = props
 
   const itemStyles = [styles.item, styles.withIcon]
 
@@ -22,13 +22,12 @@ const ClickableItemWithIcon: React.FC<ClickableItemWithIconProps> = (props) => {
     <div onClick={onClick} className={itemStyles.join(' ')}>
       <p className={styles.icon}>{children}</p>
 
-      <ClickableItem text={text} href={href} />
+      <ClickableItem text={text} />
     </div>
   )
 }
 
 ClickableItemWithIcon.defaultProps = {
-  href: '',
   active: false,
   onClick: () => {},
 }

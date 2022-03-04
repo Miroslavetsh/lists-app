@@ -10,14 +10,14 @@ export type ClickableItemWithColoredCirclePropTypes = ClickableItemPropTypes & {
 const ClickableItemWithColoredCircle: React.FC<ClickableItemWithColoredCirclePropTypes> = (
   props,
 ) => {
-  const { color, text, href } = props
+  const { color, text } = props
 
   const classNames = [styles.item, styles.withCircle]
   return (
     <div className={classNames.join(' ')}>
       <div className={styles.circle} style={{ backgroundColor: color }} />
 
-      <ClickableItem text={text} href={href} />
+      <ClickableItem text={text} />
     </div>
   )
 }
