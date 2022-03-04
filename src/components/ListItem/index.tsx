@@ -24,7 +24,10 @@ const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTyp
       <ClickableItemWithColoredCircle text={isHot ? text + '🔥' : text} color={color} />
 
       {active && (
-        <p>
+        <p
+          onClick={(e) => {
+            e.preventDefault()
+          }}>
           <svg
             width='11'
             height='11'

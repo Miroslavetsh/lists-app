@@ -34,7 +34,7 @@ const items: Array<ListItemEntity> = [
 ]
 
 const Sidebar: React.FC = () => {
-  const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
+  const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
   const showAddListPopup = () => {
