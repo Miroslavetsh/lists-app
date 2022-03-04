@@ -2,13 +2,14 @@ import React from 'react'
 
 import styles from './Styles.module.css'
 
-export type ClickableItemProps = {
+export type ClickableItemPropTypes = {
   text: string
   href?: string
 }
 
-const ClickableItem: React.FC<ClickableItemProps> = (props) => {
+const ClickableItem: React.FC<ClickableItemPropTypes> = (props) => {
   const { href, text } = props
+
   if (href) {
     return (
       <a className={styles.inner} href={href}>

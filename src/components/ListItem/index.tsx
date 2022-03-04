@@ -1,18 +1,18 @@
 import React, { MouseEventHandler } from 'react'
 import ClickableItemWithColoredCircle, {
-  ClickableItemWithColoredCircleProps,
+  ClickableItemWithColoredCirclePropTypes,
 } from '../ClickableItem/ClickableItemWithColoredCircle'
 
 import styles from './Styles.module.css'
 
-type ListItemProps<T> = T & {
+type ListItemPropTypes<T> = T & {
   active?: boolean
   isHot?: boolean
   children?: React.ReactNode
   onClick?: MouseEventHandler<HTMLLIElement>
 }
 
-const ListItem: React.FC<ListItemProps<ClickableItemWithColoredCircleProps>> = (props) => {
+const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTypes>> = (props) => {
   const { href, text, color, active, isHot, onClick } = props
   const classNames = [styles.li]
 

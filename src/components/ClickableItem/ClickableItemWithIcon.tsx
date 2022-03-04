@@ -1,9 +1,9 @@
 import React, { MouseEventHandler } from 'react'
-import ClickableItem, { ClickableItemProps } from './ClickableItem'
+import ClickableItem, { ClickableItemPropTypes } from './ClickableItem'
 
 import styles from './Styles.module.css'
 
-type ClickableItemWithIconProps = ClickableItemProps & {
+type ClickableItemWithIconProps = ClickableItemPropTypes & {
   children: React.ReactNode | JSX.Element
   className?: string
   active?: boolean

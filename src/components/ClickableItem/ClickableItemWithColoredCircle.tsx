@@ -1,13 +1,15 @@
 import React from 'react'
-import ClickableItem, { ClickableItemProps } from './ClickableItem'
+import ClickableItem, { ClickableItemPropTypes } from './ClickableItem'
 
 import styles from './Styles.module.css'
 
-export type ClickableItemWithColoredCircleProps = ClickableItemProps & {
+export type ClickableItemWithColoredCirclePropTypes = ClickableItemPropTypes & {
   color: string
 }
 
-const ClickableItemWithColoredCircle: React.FC<ClickableItemWithColoredCircleProps> = (props) => {
+const ClickableItemWithColoredCircle: React.FC<ClickableItemWithColoredCirclePropTypes> = (
+  props,
+) => {
   const { color, text, href } = props
 
   const classNames = [styles.item, styles.withCircle]
