@@ -67,8 +67,6 @@ const Popup: React.FC<PopupPropTypes> = (props) => {
   const classNames = [styles.backdrop]
   active && visible && classNames.push(styles.active)
 
-  const parent = document.getElementById('add-list-popup-parent') as HTMLElement
-
   return (
     <>
       {(visible || active) && (
