@@ -9,12 +9,18 @@
 
   border-radius: 4px;
   color: #cdcdcd;
+
+  transition: background-color 0.3s ease-in-out;
 }
 
 .li:hover {
   color: #fff;
   cursor: pointer;
   background-color: #232323;
+}
+
+.li.active:hover {
+  background: #191919;
 }
 
 .li + p {

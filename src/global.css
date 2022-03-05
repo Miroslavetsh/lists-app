@@ -1,6 +1,7 @@
 @import 'assets/nullstyle.css';
 
 #root {
+  user-select: none;
   height: 100%;
 }
 
@@ -9,6 +10,7 @@
   height: 100%;
   background-color: #141414;
   color: #fff;
+  display: flex;
 
   font-family: Roboto, sans-serif;
 }
@@ -17,4 +19,9 @@ a {
   width: 100%;
   display: block;
   color: inherit;
+}
+
+button:focus,
+input:focus {
+  outline: 1px solid #fff;
 }

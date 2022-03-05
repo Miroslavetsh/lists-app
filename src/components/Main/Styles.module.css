@@ -1,0 +1,63 @@
+.main {
+  width: 100%;
+  background: #212121;
+  padding: 64px 50px;
+}
+
+.heading {
+  display: inline-block;
+  padding: 2px 20px;
+  position: relative;
+  margin-bottom: 12px;
+
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.21;
+  border-radius: 4px;
+}
+
+.heading:hover .edit {
+  opacity: 1;
+
+  transform: translate(50%, -50%) scale(1);
+}
+
+.edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+
+  border-radius: 50%;
+
+  background-color: #fff;
+
+  transform: translate(50%, -50%) scale(0);
+  transition: all 0.2s ease-in-out;
+}
+
+.edit svg {
+  width: 12px;
+  height: 12px;
+}
+
+.edit svg path {
+  fill: #aaa;
+
+  transition: fill 0.3s ease-in-out;
+}
+
+.edit:hover {
+  background-color: #ccc;
+}
+
+.edit:hover svg path {
+  fill: #333;
+
+  transition: fill 0.3s ease-in-out;
+}

@@ -10,7 +10,7 @@ export type WithColoredCirclePropTypes = CommonPropTypes & {
 }
 
 const WithColoredCircle: React.FC<WithColoredCirclePropTypes> = (props) => {
-  const { color, text } = props
+  const { color, children } = props
 
   const classNames = [styles.item, styles.withCircle]
 
@@ -18,7 +18,7 @@ const WithColoredCircle: React.FC<WithColoredCirclePropTypes> = (props) => {
     <div className={classNames.join(' ')}>
       <div className={styles.circle} style={{ backgroundColor: color }} />
 
-      <CommonInteractive text={text} />
+      <CommonInteractive children={children} />
     </div>
   )
 }

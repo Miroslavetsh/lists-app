@@ -6,14 +6,14 @@ import { CommonPropTypes } from './Common'
 import styles from './Styles.module.css'
 
 type WithIconPropTypes = CommonPropTypes & {
-  children: React.ReactNode
+  icon?: React.ReactNode
   className?: string
   active?: boolean
   onClick?: MouseEventHandler<HTMLElement>
 }
 
 const WithIcon: React.FC<WithIconPropTypes> = (props) => {
-  const { children, className, active, onClick, text } = props
+  const { icon, className, active, onClick, children } = props
 
   const classNames = [styles.item, styles.withIcon]
   className && classNames.push(className)
@@ -21,9 +21,9 @@ const WithIcon: React.FC<WithIconPropTypes> = (props) => {
 
   return (
     <div onClick={onClick} className={classNames.join(' ')}>
-      <p className={styles.icon}>{children}</p>
+      <p className={styles.icon}>{icon}</p>
 
-      <CommonInteractive text={text} />
+      <CommonInteractive children={children} />
     </div>
   )
 }

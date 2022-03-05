@@ -70,3 +70,86 @@
 .label input:checked + span:before {
   display: block;
 }
+
+.taskLabel {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+.taskLabel span {
+  display: flex;
+  align-items: center;
+}
+
+.outer:hover span:before {
+  background-color: #f2f2f2;
+}
+
+.taskLabel input:checked + span {
+  text-decoration: line-through;
+}
+
+.taskLabel span:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+
+  border: 2px solid #fff;
+  background-color: transparent;
+
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-30%);
+}
+
+.taskLabel input {
+  display: none;
+}
+
+.taskLabel svg {
+  position: absolute;
+  left: -1px;
+  top: 6px;
+  opacity: 0;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.taskLabel svg path {
+  fill: none;
+
+  transition: all 0.3s ease-in-out;
+}
+
+.outer:hover svg path {
+  stroke: #b2b2b2;
+}
+
+.outer:hover .taskLabel svg,
+.taskLabel input:checked ~ svg {
+  opacity: 1;
+}
+
+.outer:hover input:checked ~ svg path {
+  stroke: #fff;
+}
+
+.taskLabel input:checked ~ span::before {
+  background-color: #2b593f;
+  border-color: #2b593f;
+}
+
+.add {
+  cursor: pointer;
+}
+
+.add svg path {
+  stroke: #fff;
+}

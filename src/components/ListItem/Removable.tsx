@@ -6,11 +6,12 @@ import CommonItem, { CommonPropTypes } from './Common'
 import styles from './Styles.module.css'
 
 type RemovablePropTypes = CommonPropTypes & {
-  onRemove?: () => void
+  onRemove: () => void
+  className?: string
 }
 
 const Removable: React.FC<RemovablePropTypes> = (props) => {
-  const { onRemove, active, isHot, onClick, title, text, color } = props
+  const { onRemove, className, active, isHot, onClick, title, color, children } = props
 
   const [isConfirmationWindowVisible, setIsConfirmationWindowVisible] = useState<boolean>(false)
 
@@ -22,15 +23,18 @@ const Removable: React.FC<RemovablePropTypes> = (props) => {
     setIsConfirmationWindowVisible(false)
   }
 
+  const classNames = [styles.outer]
+  className && classNames.push(className)
+
   return (
-    <div className={styles.outer}>
+    <div className={classNames.join(' ')}>
       <CommonItem
         active={active}
         isHot={isHot}
         onClick={onClick}
         title={title}
-        text={text}
         color={color}
+        children={children}
       />
 
       {active && (
@@ -64,7 +68,7 @@ const Removable: React.FC<RemovablePropTypes> = (props) => {
 }
 
 Removable.defaultProps = {
-  onRemove: () => {},
+  className: '',
 }
 
 export default Removable

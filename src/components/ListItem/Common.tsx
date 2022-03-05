@@ -13,7 +13,7 @@ export type CommonPropTypes = WithColoredCircleInteractivePropTypes & {
 }
 
 const Common: React.FC<CommonPropTypes> = (props) => {
-  const { active, isHot, onClick, title, text, color } = props
+  const { active, isHot, onClick, title, children, color } = props
 
   const classNames = [styles.li]
   active && classNames.push(styles.active)
@@ -21,7 +21,7 @@ const Common: React.FC<CommonPropTypes> = (props) => {
 
   return (
     <li title={title} onClick={onClick} className={classNames.join(' ')}>
-      <WithColoredCircleInteractive text={isHot ? text + '🔥' : text} color={color} />
+      <WithColoredCircleInteractive children={isHot ? children + '🔥' : children} color={color} />
     </li>
   )
 }
