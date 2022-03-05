@@ -12,7 +12,7 @@ type ButtonPropTypes = {
 }
 
 const Button: React.FC<ButtonPropTypes> = (props) => {
-  const { onClick, type, color, children, fullWidth, textCenter } = props
+  const { color, type, onClick, children, fullWidth, textCenter } = props
 
   const classNames = [styles.button]
   fullWidth && classNames.push(styles.fullWidth)
@@ -30,6 +30,7 @@ const Button: React.FC<ButtonPropTypes> = (props) => {
 }
 
 Button.defaultProps = {
+  children: <></>,
   fullWidth: false,
   textCenter: false,
 }
