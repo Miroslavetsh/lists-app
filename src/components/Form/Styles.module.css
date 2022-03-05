@@ -16,6 +16,8 @@
 
   border-radius: 50%;
   cursor: pointer;
+
+  transition: opacity 0.2s ease-in-out;
 }
 
 .circle:hover {
