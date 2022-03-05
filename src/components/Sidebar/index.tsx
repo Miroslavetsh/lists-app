@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { ClickableItemWithIcon } from '../ClickableItem'
 import { AddListForm } from '../Form'
 import ListItem from '../ListItem'
-import Popup from '../Popup'
+import Popup from '../Popup/Popup'
 
 import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
 import ToDoList from '../../models/ToDoList'
@@ -15,7 +15,7 @@ import styles from './Styles.module.css'
 
 const Sidebar: React.FC = () => {
   const [toDoItems, setToDoItems] = useState<Array<ToDoList>>(lists)
-  const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
+  const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
   const showAddListPopup = () => {
@@ -62,7 +62,7 @@ const Sidebar: React.FC = () => {
       <ul className={styles.mid}>
         {toDoItems
           .sort((a, b) => Number(b.isHot) - Number(a.isHot))
-          .map(({ id, name, isHot, colorId }, index) => {
+          .map(({ name, isHot, colorId }, index) => {
             const { hex } = colors.filter(({ id }) => id === colorId)[0]
             const text =
               name.length > MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH

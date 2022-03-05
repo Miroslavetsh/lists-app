@@ -5,14 +5,15 @@ import Portal from '../Portal'
 
 import styles from './Styles.module.css'
 
-type PopupPropTypes = {
+export type PopupPropTypes = {
   visible: boolean
-  onClose: () => void
   locked: boolean
+  onClose?: () => void
+  className?: string
 }
 
 const Popup: React.FC<PopupPropTypes> = (props) => {
-  const { visible, onClose, locked } = props
+  const { visible, onClose, locked, className } = props
 
   const [active, setActive] = useState<boolean>(false)
   const backdrop = useRef<HTMLDivElement>(document.createElement('div'))
@@ -24,13 +25,13 @@ const Popup: React.FC<PopupPropTypes> = (props) => {
 
     const keyHandler: EventListener = (e) => {
       if (!locked && [27].indexOf((e as unknown as KeyboardEvent<HTMLDivElement>).which) >= 0) {
-        onClose()
+        typeof onClose === 'function' && onClose()
       }
     }
 
     const clickHandler: EventListener = (e) => {
       if (!locked && e.target === current) {
-        onClose()
+        typeof onClose === 'function' && onClose()
       }
     }
 
@@ -67,17 +68,25 @@ const Popup: React.FC<PopupPropTypes> = (props) => {
   const classNames = [styles.backdrop]
   active && visible && classNames.push(styles.active)
 
+  const contentClassNames = [styles.content]
+  className && contentClassNames.push(className)
+
   return (
     <>
       {(visible || active) && (
         <Portal className={styles.portal}>
           <div ref={backdrop} className={classNames.join(' ')}>
-            <div className={styles.content}>{props.children}</div>
+            <div className={contentClassNames.join(' ')}>{props.children}</div>
           </div>
         </Portal>
       )}
     </>
   )
+}
+
+Popup.defaultProps = {
+  className: '',
+  onClose: () => {},
 }
 
 export default Popup

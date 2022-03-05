@@ -30,3 +30,29 @@
   color: #fff;
   box-shadow: 0 6px 10px rgba(255, 255, 255, 0.05);
 }
+
+.confirmation {
+  max-width: 300px;
+}
+
+.heading {
+  font-weight: 300;
+  margin-bottom: 12px;
+
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+.heading span {
+  cursor: help;
+  font-weight: 400;
+  color: #d10808;
+  text-decoration: underline;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
