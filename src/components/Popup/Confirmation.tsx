@@ -17,7 +17,7 @@ const Confirmation: React.FC<ConfirmationPropTypes> = (props) => {
   return (
     <Common visible={visible} locked={true} className={styles.confirmation}>
       <h2 className={styles.heading}>
-        Список будет удалён
+        Список будет удалён{' '}
         <span title='Другими словами, без возможности восстановления'>безвозвратно</span>
       </h2>
 
