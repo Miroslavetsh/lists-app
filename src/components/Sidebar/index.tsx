@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { WithIconInteractive } from '../Interactive'
 import { RemovableListItem } from '../ListItem'
 import { ListAddingForm } from '../Form'
-import Popup from '../Popup/Popup'
+import { CommonPopup } from '../Popup'
 
 import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
 import ToDoList from '../../models/ToDoList'
@@ -118,9 +118,9 @@ const Sidebar: React.FC = () => {
           </svg>
         </WithIconInteractive>
 
-        <Popup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
+        <CommonPopup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
           <ListAddingForm items={toDoItems} setItems={setToDoItems} onAdd={hideAddListPopup} />
-        </Popup>
+        </CommonPopup>
       </div>
     </div>
   )

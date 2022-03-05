@@ -1,2 +1,4 @@
-export {default as Popup} from './Popup'
-export {default as ConfirmationPopup} from './ConfirmationPopup'
+export { default as CommonPopup } from './Common'
+export { default as ConfirmationPopup } from './Confirmation'
+
+export { type CommonPropTypes as CommonPopupPropTypes } from './Common'

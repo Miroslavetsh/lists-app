@@ -2,22 +2,22 @@ import React, { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import 'wicg-inert'
 import Button from '../Button'
 
-import Popup, { PopupPropTypes } from './Popup'
+import Common, { CommonPropTypes } from './Common'
 
 import styles from './Styles.module.css'
 
-type ConfirmationPopupPropTypes = Pick<PopupPropTypes, 'onClose' | 'visible'> & {
+type ConfirmationPropTypes = Pick<CommonPropTypes, 'onClose' | 'visible'> & {
   onSuccess: () => void
   onDeny: () => void
 }
 
-const ConfirmationPopup: React.FC<ConfirmationPopupPropTypes> = (props) => {
-  const { visible, onSuccess, onDeny } = props
+const Confirmation: React.FC<ConfirmationPropTypes> = (props) => {
+  const { onSuccess, onDeny, visible } = props
 
   return (
-    <Popup visible={visible} locked={true} className={styles.confirmation}>
+    <Common visible={visible} locked={true} className={styles.confirmation}>
       <h2 className={styles.heading}>
-        Список будет удалён{' '}
+        Список будет удалён
         <span title='Другими словами, без возможности восстановления'>безвозвратно</span>
       </h2>
 
@@ -26,8 +26,8 @@ const ConfirmationPopup: React.FC<ConfirmationPopupPropTypes> = (props) => {
 
         <Button color='#373737' type='button' onClick={onDeny} children='Отменить' />
       </div>
-    </Popup>
+    </Common>
   )
 }
 
-export default ConfirmationPopup
+export default Confirmation

@@ -5,15 +5,15 @@ import Portal from '../Portal'
 
 import styles from './Styles.module.css'
 
-export type PopupPropTypes = {
+export type CommonPropTypes = {
   visible: boolean
   locked: boolean
   onClose?: () => void
   className?: string
 }
 
-const Popup: React.FC<PopupPropTypes> = (props) => {
-  const { visible, onClose, locked, className } = props
+const Common: React.FC<CommonPropTypes> = (props) => {
+  const { visible, locked, onClose, className } = props
 
   const [active, setActive] = useState<boolean>(false)
   const backdrop = useRef<HTMLDivElement>(document.createElement('div'))
@@ -84,9 +84,9 @@ const Popup: React.FC<PopupPropTypes> = (props) => {
   )
 }
 
-Popup.defaultProps = {
-  className: '',
+Common.defaultProps = {
   onClose: () => {},
+  className: '',
 }
 
-export default Popup
+export default Common
