@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from 'react'
 
 import { CommonForm } from '.'
-import { TextInput, CheckBoxInput } from '../Input'
+import { CommonInput, CheckBoxInput } from '../Input'
 import Button from '../Button'
 
 import ListItemEntity from '../../models/ToDoList'
@@ -65,7 +65,7 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) =
 
   return (
     <CommonForm>
-      <TextInput
+      <CommonInput
         placeholder={inputTextPlaceholder}
         value={textValue}
         onChange={handleTextChange}

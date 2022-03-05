@@ -2,7 +2,7 @@ import React, { ChangeEvent, HTMLInputTypeAttribute } from 'react'
 
 import styles from './Styles.module.css'
 
-export type InputPropTypes = {
+export type CommonPropTypes = {
   placeholder: string
   value: string
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
@@ -10,8 +10,8 @@ export type InputPropTypes = {
   type?: HTMLInputTypeAttribute
 }
 
-const Input: React.FC<InputPropTypes> = (props) => {
-  const { placeholder, value, onChange, type, valid } = props
+const Common: React.FC<CommonPropTypes> = (props) => {
+  const { placeholder, value, onChange, valid, type } = props
 
   const classNames = [styles.input]
   !valid && classNames.push(styles.notValid)
@@ -27,8 +27,8 @@ const Input: React.FC<InputPropTypes> = (props) => {
   )
 }
 
-Input.defaultProps = {
+Common.defaultProps = {
   type: 'text',
 }
 
-export default Input
+export default Common
