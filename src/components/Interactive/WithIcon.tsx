@@ -1,22 +1,21 @@
 import React, { MouseEventHandler } from 'react'
 
-import { ClickableItem } from '.'
-import { ClickableItemPropTypes } from './ClickableItem'
+import { CommonInteractive } from '.'
+import { CommonPropTypes } from './Common'
 
 import styles from './Styles.module.css'
 
-type ClickableItemWithIconProps = ClickableItemPropTypes & {
-  children: React.ReactNode | JSX.Element
+type WithIconPropTypes = CommonPropTypes & {
+  children: React.ReactNode
   className?: string
   active?: boolean
   onClick?: MouseEventHandler<HTMLElement>
 }
 
-const ClickableItemWithIcon: React.FC<ClickableItemWithIconProps> = (props) => {
-  const { children, text, className, active, onClick } = props
+const WithIcon: React.FC<WithIconPropTypes> = (props) => {
+  const { children, className, active, onClick, text } = props
 
   const classNames = [styles.item, styles.withIcon]
-
   className && classNames.push(className)
   active && classNames.push(styles.active)
 
@@ -24,14 +23,15 @@ const ClickableItemWithIcon: React.FC<ClickableItemWithIconProps> = (props) => {
     <div onClick={onClick} className={classNames.join(' ')}>
       <p className={styles.icon}>{children}</p>
 
-      <ClickableItem text={text} />
+      <CommonInteractive text={text} />
     </div>
   )
 }
 
-ClickableItemWithIcon.defaultProps = {
+WithIcon.defaultProps = {
+  className: '',
   active: false,
   onClick: () => {},
 }
 
-export default ClickableItemWithIcon
+export default WithIcon

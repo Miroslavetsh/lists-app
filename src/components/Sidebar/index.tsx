@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 
-import { ClickableItemWithIcon } from '../ClickableItem'
+import { WithIconInteractive } from '../Interactive'
+import { RemovableListItem } from '../ListItem'
 import { AddListForm } from '../Form'
-import ListItem from '../ListItem'
 import Popup from '../Popup/Popup'
 
 import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
@@ -38,7 +38,7 @@ const Sidebar: React.FC = () => {
     <div className={styles.sidebar}>
       <div className={styles.top}>
         <a href='/'>
-          <ClickableItemWithIcon
+          <WithIconInteractive
             active={activeItemIndex === 0}
             onClick={() => {
               setActiveItemIndex(0)
@@ -55,7 +55,7 @@ const Sidebar: React.FC = () => {
                 fill='black'
               />
             </svg>
-          </ClickableItemWithIcon>
+          </WithIconInteractive>
         </a>
       </div>
 
@@ -75,7 +75,7 @@ const Sidebar: React.FC = () => {
             }
 
             const Item = (
-              <ListItem
+              <RemovableListItem
                 onRemove={onRemove}
                 onClick={() => setActiveItemIndex(index + 1)}
                 active={index + 1 === activeItemIndex}
@@ -90,8 +90,8 @@ const Sidebar: React.FC = () => {
           })}
       </ul>
 
-      <div id='add-list-popup-parent'>
-        <ClickableItemWithIcon
+      <div>
+        <WithIconInteractive
           onClick={togglePopupVisible}
           className={styles.add}
           text='Добавить список'>
@@ -116,7 +116,7 @@ const Sidebar: React.FC = () => {
               strokeLinejoin='round'
             />
           </svg>
-        </ClickableItemWithIcon>
+        </WithIconInteractive>
 
         <Popup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
           <AddListForm items={toDoItems} setItems={setToDoItems} onAdd={hideAddListPopup} />

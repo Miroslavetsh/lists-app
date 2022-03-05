@@ -1,22 +1,16 @@
-import React, { MouseEventHandler, useState } from 'react'
+import React, { useState } from 'react'
 
-import { ClickableItemWithColoredCircle } from '../ClickableItem'
-import { ClickableItemWithColoredCirclePropTypes } from '../ClickableItem/ClickableItemWithColoredCircle'
 import { ConfirmationPopup } from '../Popup'
+import CommonItem, { CommonPropTypes } from './Common'
 
 import styles from './Styles.module.css'
 
-type ListItemPropTypes<T> = T & {
-  active?: boolean
-  isHot?: boolean
-  children?: React.ReactNode
-  onClick?: MouseEventHandler<HTMLLIElement>
-  title?: string
+type RemovablePropTypes = CommonPropTypes & {
   onRemove?: () => void
 }
 
-const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTypes>> = (props) => {
-  const { text, color, active, isHot, onClick, title, onRemove } = props
+const Removable: React.FC<RemovablePropTypes> = (props) => {
+  const { onRemove, active, isHot, onClick, title, text, color } = props
 
   const [isConfirmationWindowVisible, setIsConfirmationWindowVisible] = useState<boolean>(false)
 
@@ -28,14 +22,16 @@ const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTyp
     setIsConfirmationWindowVisible(false)
   }
 
-  const classNames = [styles.li]
-  active && classNames.push(styles.active)
-  isHot && classNames.push(styles.hot)
-
-  //TODO: окно конфирмации на удаление айтема / Через попап
   return (
-    <li title={title} onClick={onClick} className={classNames.join(' ')}>
-      <ClickableItemWithColoredCircle text={isHot ? text + '🔥' : text} color={color} />
+    <div className={styles.outer}>
+      <CommonItem
+        active={active}
+        isHot={isHot}
+        onClick={onClick}
+        title={title}
+        text={text}
+        color={color}
+      />
 
       {active && (
         <>
@@ -63,15 +59,12 @@ const ListItem: React.FC<ListItemPropTypes<ClickableItemWithColoredCirclePropTyp
           />
         </>
       )}
-    </li>
+    </div>
   )
 }
 
-ListItem.defaultProps = {
-  active: false,
-  isHot: false,
-  onClick: () => {},
+Removable.defaultProps = {
   onRemove: () => {},
 }
 
-export default ListItem
+export default Removable

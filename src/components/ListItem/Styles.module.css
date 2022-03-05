@@ -1,3 +1,7 @@
+.outer {
+  position: relative;
+}
+
 .li {
   display: flex;
   justify-content: space-between;
@@ -5,7 +9,6 @@
 
   border-radius: 4px;
   color: #cdcdcd;
-  position: relative;
 }
 
 .li:hover {
@@ -14,7 +17,7 @@
   background-color: #232323;
 }
 
-.li p {
+.li + p {
   position: absolute;
   top: 50%;
   right: 12px;
@@ -29,15 +32,15 @@
 
   transition: background-color 0.3s ease-in-out;
 }
-.li p svg {
+.li + p svg {
   max-width: 100%;
 }
 
-.li p:hover {
+.li + p:hover {
   background: #6e3630;
 }
 
-.li svg path {
+.li + p svg path {
   fill: #fff;
 }
 
