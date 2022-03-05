@@ -71,6 +71,10 @@
   display: block;
 }
 
+.outer {
+  margin-bottom: 16px;
+}
+
 .taskLabel {
   position: relative;
   display: inline-flex;
@@ -123,7 +127,7 @@
 }
 
 .taskLabel svg path {
-  fill: none;
+  fill: none !important;
 
   transition: all 0.3s ease-in-out;
 }
