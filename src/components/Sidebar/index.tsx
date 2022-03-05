@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { WithIconInteractive } from '../Interactive'
 import { RemovableListItem } from '../ListItem'
-import { AddListForm } from '../Form'
+import { ListAddingForm } from '../Form'
 import Popup from '../Popup/Popup'
 
 import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
@@ -119,7 +119,7 @@ const Sidebar: React.FC = () => {
         </WithIconInteractive>
 
         <Popup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
-          <AddListForm items={toDoItems} setItems={setToDoItems} onAdd={hideAddListPopup} />
+          <ListAddingForm items={toDoItems} setItems={setToDoItems} onAdd={hideAddListPopup} />
         </Popup>
       </div>
     </div>

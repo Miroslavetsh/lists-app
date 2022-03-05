@@ -1,3 +1,5 @@
-export { default as Form } from './Form'
-export { default as AddListForm } from './AddListForm'
-export { default as CreateTaskForm } from './CreateTaskForm'
+export { default as CommonForm } from './Common'
+export { default as ListAddingForm } from './ListAdding'
+export { default as TaskCreatingForm } from './TaskCreating'
+
+export { type CommonPropTypes as CommonFormPropTypes } from './Common'

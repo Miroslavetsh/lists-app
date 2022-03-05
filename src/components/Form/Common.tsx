@@ -2,12 +2,12 @@ import React from 'react'
 
 import styles from './Styles.module.css'
 
-export type FormPropTypes = {
+export type CommonPropTypes = {
   children: React.ReactNode
 }
 
-const Form: React.FC<FormPropTypes> = ({ children }) => {
+const Common: React.FC<CommonPropTypes> = ({ children }) => {
   return <form className={styles.form}>{children}</form>
 }
 
-export default Form
+export default Common

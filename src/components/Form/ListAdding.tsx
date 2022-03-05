@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from 'react'
 
-import { Form } from '.'
+import { CommonForm } from '.'
 import { TextInput, CheckBoxInput } from '../Input'
 import Button from '../Button'
 
@@ -16,18 +16,16 @@ import styles from './Styles.module.css'
 
 const COLORS: Array<Color> = colors
 
-type AddListFormPropTypes = {
+type ListAddingPropTypes = {
   items: Array<ToDoList>
   setItems: (items: Array<ToDoList>) => void
   onAdd?: () => void
 }
 
-const AddListForm: React.FC<AddListFormPropTypes> = ({ items, setItems, onAdd }) => {
+const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) => {
   const [activeColor, setActiveColor] = useState<number>(1)
-
   const [textValue, setTextValue] = useState<string>('')
   const [inputValid, setInputValid] = useState<boolean>(true)
-
   const [isHotChecked, setIsHotChecked] = useState<boolean>(false)
 
   const debouncedTextValue = useDebounce<string>(textValue, 500)
@@ -51,10 +49,10 @@ const AddListForm: React.FC<AddListFormPropTypes> = ({ items, setItems, onAdd })
   // }, [debouncedTextValue])
 
   //TODO: Сделать проверку совпадения имени чтобы избежать повторений
-  const addList = (obj: ListItemEntity) => {
-    if (obj.name.trim() === '') {
+  const addList = (item: ListItemEntity) => {
+    if (item.name.trim() === '') {
     } else {
-      setItems([...items, obj])
+      setItems([...items, item])
       setActiveColor(1)
       setIsHotChecked(false)
       setTextValue('')
@@ -66,7 +64,7 @@ const AddListForm: React.FC<AddListFormPropTypes> = ({ items, setItems, onAdd })
   const inputTextPlaceholder = inputValid ? 'Название списка' : 'Введите корректое название'
 
   return (
-    <Form>
+    <CommonForm>
       <TextInput
         placeholder={inputTextPlaceholder}
         value={textValue}
@@ -112,12 +110,12 @@ const AddListForm: React.FC<AddListFormPropTypes> = ({ items, setItems, onAdd })
         }}>
         Добавить
       </Button>
-    </Form>
+    </CommonForm>
   )
 }
 
-AddListForm.defaultProps = {
+ListAdding.defaultProps = {
   onAdd: () => {},
 }
 
-export default AddListForm
+export default ListAdding
