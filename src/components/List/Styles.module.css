@@ -1,4 +1,5 @@
 .list {
+  margin-bottom: 12px;
   max-height: 420px;
   overflow-y: auto;
   padding-right: 8px;
@@ -21,6 +22,10 @@
 
 .list > * {
   margin-bottom: 8px;
+}
+
+.list > *:last-child {
+  margin-bottom: 0;
 }
 
 .add {
