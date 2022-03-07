@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import axios from 'axios'
+import ContentEditable from 'react-contenteditable'
 
 import { TaskList } from '../List'
 
@@ -12,6 +13,8 @@ const url = new URL((process.env.REACT_APP_API_URL || 'localhost:3001/') + 'task
 
 const Main: React.FC = () => {
   const [expandedTasks, setExpandedTasks] = useState<Array<Task & { list: ListItemEntity }>>([])
+  const [currentListName, setCurrentListName] = useState<string>('Загружаемса...')
+  const [isHeadingEditable, setIsHeadingEditable] = useState<boolean>(false)
 
   useEffect(() => {
     axios
@@ -21,9 +24,18 @@ const Main: React.FC = () => {
         },
       })
       .then(({ data }) => {
+        setCurrentListName(data[0].list.name)
         setExpandedTasks(data)
       })
   }, [])
+
+  const handleCurrentListNameChange = (e: SyntheticEvent) => {
+    setCurrentListName((e.target as HTMLInputElement).value)
+  }
+
+  const handleChangeButtonClick = () => {
+    setIsHeadingEditable(!isHeadingEditable)
+  }
 
   return (
     <main className={styles.main}>
@@ -32,8 +44,14 @@ const Main: React.FC = () => {
           backgroundColor: '#28456C',
         }}
         className={styles.heading}>
-        {expandedTasks[0] && expandedTasks[0].list && expandedTasks[0].list.name}
-        <button type='button' className={styles.edit}>
+        <ContentEditable
+          className={styles.textInput}
+          html={currentListName}
+          disabled={!isHeadingEditable}
+          onChange={handleCurrentListNameChange}
+        />
+
+        <button type='button' className={styles.edit} onClick={handleChangeButtonClick}>
           <svg
             width='15'
             height='15'
