@@ -4,12 +4,11 @@ import ContentEditable from 'react-contenteditable'
 
 import { TaskList } from '../List'
 
+import ListItemEntity from '../../models/ToDoList'
 import Task from '../../models/Task'
+import getApiPath from '../../utils/getApiPath'
 
 import styles from './Styles.module.css'
-import ListItemEntity from '../../models/ToDoList'
-
-const url = new URL((process.env.REACT_APP_API_URL || 'localhost:3001/') + 'tasks')
 
 const Main: React.FC = () => {
   const [expandedTasks, setExpandedTasks] = useState<Array<Task & { list: ListItemEntity }>>([])
@@ -18,7 +17,7 @@ const Main: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get(url.toString(), {
+      .get(getApiPath('tasks'), {
         params: {
           _expand: 'list',
         },
