@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import { TaskList } from '../List'
 
 import Task from '../../models/Task'
 
 import styles from './Styles.module.css'
+import ListItemEntity from '../../models/ToDoList'
 
-const URL = (process.env.REACT_APP_API_URL || 'localhost:3001/') + 'tasks'
+const url = new URL((process.env.REACT_APP_API_URL || 'localhost:3001/') + 'tasks')
 
 const Main: React.FC = () => {
-  const [tasks, setTasks] = useState<Array<Task>>([])
+  const [expandedTasks, setExpandedTasks] = useState<Array<Task & { list: ListItemEntity }>>([])
 
   useEffect(() => {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => {
-        setTasks(data)
+    axios
+      .get(url.toString(), {
+        params: {
+          _expand: 'list',
+        },
+      })
+      .then(({ data }) => {
+        setExpandedTasks(data)
       })
   }, [])
 
@@ -26,7 +32,7 @@ const Main: React.FC = () => {
           backgroundColor: '#28456C',
         }}
         className={styles.heading}>
-        Продажи
+        {expandedTasks[0] && expandedTasks[0].list && expandedTasks[0].list.name}
         <button type='button' className={styles.edit}>
           <svg
             width='15'
@@ -42,7 +48,7 @@ const Main: React.FC = () => {
         </button>
       </h2>
 
-      <TaskList list={tasks} />
+      <TaskList list={expandedTasks} />
     </main>
   )
 }
