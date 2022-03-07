@@ -48,7 +48,7 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) =
   //   console.log(debouncedTextValue)
   // }, [debouncedTextValue])
 
-  //TODO: Сделать проверку совпадения имени чтобы избежать повторений
+  //FIXME: Сделать проверку совпадения имени чтобы избежать повторений
   const addList = (item: ListItemEntity) => {
     if (item.name.trim() === '') {
     } else {
