@@ -1,4 +1,4 @@
-export default interface ListItemEntity {
+export default interface ToDoList {
   id: number
   colorId: number
   name: string

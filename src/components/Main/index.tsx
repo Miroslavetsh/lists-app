@@ -4,14 +4,14 @@ import ContentEditable from 'react-contenteditable'
 
 import { TaskList } from '../List'
 
-import ListItemEntity from '../../models/ToDoList'
+import ToDoList from '../../models/ToDoList'
 import Task from '../../models/Task'
 import getApiPath from '../../utils/getApiPath'
 
 import styles from './Styles.module.css'
 
 const Main: React.FC = () => {
-  const [expandedTasks, setExpandedTasks] = useState<Array<Task & { list: ListItemEntity }>>([])
+  const [expandedTasks, setExpandedTasks] = useState<Array<Task & { list: ToDoList }>>([])
   const [currentListName, setCurrentListName] = useState<string>('Загружаемса...')
   const [isHeadingEditable, setIsHeadingEditable] = useState<boolean>(false)
 
