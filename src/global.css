@@ -25,3 +25,7 @@ button:focus,
 input:focus {
   outline: 1px solid #fff;
 }
+
+a:focus {
+  text-decoration: underline;
+}
