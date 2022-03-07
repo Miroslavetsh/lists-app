@@ -1,0 +1,195 @@
+{
+  "pizzas": [
+    {
+      "id": 0,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/peperoni_fresh_and_spice.png?alt=media&token=6e13fb9f-9303-4b90-8995-3f6c82d4c101",
+      "name": "Peperoni Fresh & spice",
+      "description": "Spicy pepperoni, extra mozzarella, tomato sauce",
+      "types": [
+        0
+      ],
+      "sizes": [
+        30
+      ],
+      "price": 80,
+      "category": "Meat",
+      "popularity": 4,
+      "hit": false
+    },
+    {
+      "id": 1,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/cheese.png?alt=media&token=4597faaf-ac6e-4de0-b95d-9452d1250511",
+      "name": "Cheese",
+      "description": "Mozzarella, cheddar and parmesan cheeses, alfredo sauce",
+      "types": [
+        0
+      ],
+      "sizes": [
+        30
+      ],
+      "price": 24,
+      "category": "Vegan",
+      "popularity": 6,
+      "hit": true
+    },
+    {
+      "id": 2,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/chicken_bbq.png?alt=media&token=3a2abd2e-303b-4b3a-8139-456a2364cf62",
+      "name": "Chicken BBQ",
+      "description": "Chicken, bacon, barbecue sauce, red onion, mozzarella, tomato sauce",
+      "types": [
+        0
+      ],
+      "sizes": [
+        40
+      ],
+      "price": 29,
+      "category": "Meat",
+      "popularity": 4,
+      "hit": false
+    },
+    {
+      "id": 3,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/sour_sweet_chicken.png?alt=media&token=96f08418-5a89-4038-a99b-f72f9a26bdb8",
+      "name": "Sour-sweet chicken",
+      "description": "Chicken, ham, ranch sauce, mozzarella, tomatoes, garlic",
+      "types": [
+        1
+      ],
+      "sizes": [
+        26
+      ],
+      "price": 27,
+      "category": "Grill",
+      "popularity": 2
+    },
+    {
+      "id": 4,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/cheeseburger.png?alt=media&token=51e296cf-46f7-44b6-bcb8-0bfa765526af",
+      "name": "Cheeseburger-pizza",
+      "description": "Meat bolognese sauce, burger sauce, pickles, tomatoes, red onions, mozzarella",
+      "types": [
+        1
+      ],
+      "sizes": [
+        26
+      ],
+      "price": 41,
+      "category": "Spicy",
+      "popularity": 8,
+      "hit": false
+    },
+    {
+      "id": 5,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/crazy_peperoni.png?alt=media&token=f14f452a-3e58-403b-bd60-fd3c76b0a481",
+      "name": "Crazy peperoni",
+      "description": "Spicy pepperoni, extra mozzarella, tomatoes, tomato sauce",
+      "types": [
+        0
+      ],
+      "sizes": [
+        40
+      ],
+      "price": 58,
+      "category": "Grill",
+      "popularity": 2,
+      "hit": false
+    },
+    {
+      "id": 6,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/peperoni.png?alt=media&token=9b09145b-c0f9-442f-baf1-2050870ad1a4",
+      "name": "Pepperoni",
+      "description": "Spicy pepperoni, extra mozzarella, tomato sauce",
+      "types": [
+        1
+      ],
+      "sizes": [
+        30
+      ],
+      "price": 67,
+      "category": "Vegan",
+      "popularity": 9,
+      "hit": true
+    },
+    {
+      "id": 7,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/margarita.png?alt=media&token=afc9537e-4c31-4214-98c9-66f943e49ff4",
+      "name": "Margarita",
+      "description": "Bacon, cheddar and parmesan cheeses, mozzarella, tomatoes, red onion, garlic, alfredo sauce, Italian herbs",
+      "types": [
+        0
+      ],
+      "sizes": [
+        26
+      ],
+      "price": 45,
+      "category": "Closed",
+      "popularity": 10,
+      "hit": true
+    },
+    {
+      "id": 8,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/seasons.png?alt=media&token=c18be8c3-a4a4-426e-ad3c-6a39e77cb46d",
+      "name": "Seasons",
+      "description": "Enlarged portion of mozzarella, ham, spicy pepperoni, diced bryndza, tomatoes, mushrooms, Italian herbs, tomato sauce",
+      "types": [
+        0
+      ],
+      "sizes": [
+        30
+      ],
+      "price": 39,
+      "category": "Closed",
+      "popularity": 10,
+      "hit": true
+    },
+    {
+      "id": 9,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/vegetables_and_mushrooms.png?alt=media&token=50b8dcd5-7dd9-4f56-9174-76265713dd9f",
+      "name": "Vegetables & mushrooms 🌱",
+      "description": "Mushrooms, tomatoes, bell peppers, red onions, black olives, diced bryndza, mozzarella, tomato sauce, Italian herbs",
+      "types": [
+        1
+      ],
+      "sizes": [
+        40
+      ],
+      "price": 36,
+      "category": "Vegan",
+      "popularity": 5,
+      "hit": false
+    },
+    {
+      "id": 10,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/vegetables_and_mushrooms.png?alt=media&token=50b8dcd5-7dd9-4f56-9174-76265713dd9f",
+      "name": "Vegetables & mushrooms 🌱",
+      "description": "Mushrooms, tomatoes, bell peppers, red onions, black olives, diced bryndza, mozzarella, tomato sauce, Italian herbs",
+      "types": [
+        0
+      ],
+      "sizes": [
+        30
+      ],
+      "price": 28,
+      "category": "Vegan",
+      "popularity": 3,
+      "hit": false
+    },
+    {
+      "id": 11,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/best-n-top-pizza-shop.appspot.com/o/peperoni_fresh_and_spice.png?alt=media&token=6e13fb9f-9303-4b90-8995-3f6c82d4c101",
+      "name": "Peperoni Fresh & spice",
+      "description": "Spicy pepperoni, extra mozzarella, tomato sauce",
+      "types": [
+        1
+      ],
+      "sizes": [
+        26
+      ],
+      "price": 60,
+      "category": "Meat",
+      "popularity": 8,
+      "hit": false
+    }
+  ]
+}

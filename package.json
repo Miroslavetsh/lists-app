@@ -1,0 +1,24 @@
+{
+  "name": "best-n-top-pizza-shop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "serve": "node server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Miroslavetsh/best-n-top-pizza-shop.git"
+  },
+  "author": "Miroslavetsh <dfgshte@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Miroslavetsh/best-n-top-pizza-shop/issues"
+  },
+  "homepage": "https://github.com/Miroslavetsh/best-n-top-pizza-shop#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.2",
+    "json-server": "^0.17.0"
+  }
+}
