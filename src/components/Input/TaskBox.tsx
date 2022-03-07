@@ -24,13 +24,8 @@ const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
   }
 
   const handleInputTextChange = (e: SyntheticEvent) => {
-    console.log(e.target);
-    
     setInputText((e.target as HTMLInputElement).value)
   }
-
-  console.log(text);
-  
 
   return (
     <RemovableListItem<CommonInteractivePropTypes>
@@ -57,7 +52,12 @@ const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
             />
           </svg>
 
-          <ContentEditable className={styles.textInput} html={inputText} disabled={false} onChange={handleInputTextChange} />
+          <ContentEditable
+            className={styles.textInput}
+            html={inputText}
+            disabled={false}
+            onChange={handleInputTextChange}
+          />
         </div>
       </label>
     </RemovableListItem>
