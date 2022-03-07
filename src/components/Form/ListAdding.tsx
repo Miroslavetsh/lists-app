@@ -1,34 +1,39 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
+import axios from 'axios'
 
 import { CommonForm } from '.'
 import { CommonInput, CheckBoxInput } from '../Input'
 import Button from '../Button'
 
-import ListItemEntity from '../../models/ToDoList'
 import ToDoList from '../../models/ToDoList'
 import Color from '../../models/Color'
 import useDebounce from '../../utils/hooks/useDebounce'
-
-// FIXME: переписать на бэкенд и делать фетч запрос
-import { colors, lists } from '../../assets/imdb.json'
+import getApiPath from '../../utils/getApiPath'
+import { DEFAULT_COLOR } from '../../utils/constants'
 
 import styles from './Styles.module.css'
 
-const COLORS: Array<Color> = colors
-
 type ListAddingPropTypes = {
-  items: Array<ToDoList>
-  setItems: (items: Array<ToDoList>) => void
-  onAdd?: () => void
+  toDoItems: Array<ToDoList>
+  setToDoItems: (items: Array<ToDoList>) => void
+  onAdd: () => void
 }
 
-const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) => {
+const ListAdding: React.FC<ListAddingPropTypes> = ({ toDoItems, setToDoItems, onAdd }) => {
+  const [colors, setColors] = useState<Array<Color>>([DEFAULT_COLOR])
   const [activeColor, setActiveColor] = useState<number>(1)
   const [textValue, setTextValue] = useState<string>('')
   const [inputValid, setInputValid] = useState<boolean>(true)
   const [isHotChecked, setIsHotChecked] = useState<boolean>(false)
+  const [isAddingNotStarted, setIsAddingNotStarted] = useState<boolean>(true)
 
   const debouncedTextValue = useDebounce<string>(textValue, 500)
+
+  useEffect(() => {
+    axios.get(getApiPath('colors')).then(({ data }) => {
+      setColors(data)
+    })
+  }, [])
 
   const handleTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value.trim() === '') {
@@ -44,20 +49,23 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) =
     setIsHotChecked(!isHotChecked)
   }
 
-  // useEffect(() => {
-  //   console.log(debouncedTextValue)
-  // }, [debouncedTextValue])
-
   //FIXME: Сделать проверку совпадения имени чтобы избежать повторений
-  const addList = (item: ListItemEntity) => {
-    if (item.name.trim() === '') {
-    } else {
-      setItems([...items, item])
-      setActiveColor(1)
-      setIsHotChecked(false)
-      setTextValue('')
+  const addList = ({ name, colorId, isHot }: Pick<ToDoList, 'name' | 'colorId' | 'isHot'>) => {
+    if (!(name.trim() === '')) {
+      setIsAddingNotStarted(false)
 
-      typeof onAdd === 'function' && onAdd()
+      axios.post(getApiPath('lists'), { name, colorId, isHot }).then(({ data }) => {
+        setActiveColor(1)
+        setIsHotChecked(false)
+        setTextValue('')
+        setIsAddingNotStarted(true)
+
+        onAdd()
+
+        setToDoItems([...toDoItems, { ...data }])
+      })
+    } else {
+      setInputValid(false)
     }
   }
 
@@ -79,7 +87,7 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) =
       />
 
       <ul className={styles.ul}>
-        {COLORS.map(({ id, name, hex }) => {
+        {colors.map(({ id, name, hex }) => {
           const classNames = [styles.circle]
           activeColor === id && classNames.push(styles.active)
 
@@ -100,22 +108,18 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ items, setItems, onAdd }) =
         textCenter={true}
         color='#08D11C'
         type='button'
+        disabled={!isAddingNotStarted}
         onClick={() => {
           addList({
-            id: lists[lists.length - 1].id + 1,
             name: debouncedTextValue,
             colorId: activeColor,
             isHot: isHotChecked,
           })
         }}>
-        Добавить
+        {isAddingNotStarted ? 'Добавить' : 'Добавление...'}
       </Button>
     </CommonForm>
   )
-}
-
-ListAdding.defaultProps = {
-  onAdd: () => {},
 }
 
 export default ListAdding

@@ -1,22 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import { WithIconInteractive } from '../Interactive'
 import { RemovableListItem } from '../ListItem'
 import { ListAddingForm } from '../Form'
 import { CommonPopup } from '../Popup'
 
-import { MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
 import ToDoList from '../../models/ToDoList'
-
-// TODO: Переписать на фетч
-import { lists, colors } from '../../assets/imdb.json'
+import Color from '../../models/Color'
+import { DEFAULT_COLOR, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
+import getApiPath from '../../utils/getApiPath'
 
 import styles from './Styles.module.css'
 
 const Sidebar: React.FC = () => {
-  const [toDoItems, setToDoItems] = useState<Array<ToDoList>>(lists)
+  const [toDoItems, setToDoItems] = useState<Array<ToDoList>>([])
+  const [availableColors, setAvailableColors] = useState<Array<Color>>([DEFAULT_COLOR])
   const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
+
+  useEffect(() => {
+    axios.get(getApiPath('lists')).then(({ data }) => {
+      setToDoItems(data)
+    })
+
+    axios.get(getApiPath('colors')).then(({ data }) => {
+      setAvailableColors(data)
+    })
+  }, [])
 
   const showAddListPopup = () => {
     setPopupAddListVisible(true)
@@ -65,7 +76,8 @@ const Sidebar: React.FC = () => {
         {toDoItems
           .sort((a, b) => Number(b.isHot) - Number(a.isHot))
           .map(({ name, isHot, colorId }, index) => {
-            const { hex } = colors.filter(({ id }) => id === colorId)[0]
+            const { hex } = availableColors.filter(({ id }) => id === colorId)[0] || DEFAULT_COLOR
+
             const text =
               name.length > MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH
                 ? name.slice(0, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH - 3) + '...'
@@ -124,7 +136,11 @@ const Sidebar: React.FC = () => {
         </WithIconInteractive>
 
         <CommonPopup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
-          <ListAddingForm items={toDoItems} setItems={setToDoItems} onAdd={hideAddListPopup} />
+          <ListAddingForm
+            toDoItems={toDoItems}
+            setToDoItems={setToDoItems}
+            onAdd={hideAddListPopup}
+          />
         </CommonPopup>
       </div>
     </div>
