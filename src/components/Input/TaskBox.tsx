@@ -4,32 +4,31 @@ import { TaskCreatingForm } from '../Form'
 import { CommonInteractivePropTypes, WithIconInteractive } from '../Interactive'
 import { RemovableListItem } from '../ListItem'
 
+import Task from '../../models/Task'
+
 import styles from './Styles.module.css'
 
-const TaskBox: React.FC = () => {
-  const [checked, setChecked] = useState<boolean>(false)
-  const [creatingTaskVisible, setCreatingTaskVisible] = useState<boolean>(false)
+type TaskBoxPropTypes = Pick<Task, 'text' | 'completed'>
 
-  const toggleCreatingTaskVisible = () => {
-    setCreatingTaskVisible(!creatingTaskVisible)
-  }
+const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
+  const { text, completed } = props
+
+  const [checked, setChecked] = useState<boolean>(completed)
 
   const toggleCHecked = () => {
     setChecked(!checked)
   }
 
   return (
-    <>
-      <RemovableListItem<CommonInteractivePropTypes>
-        active={true}
-        onClick={toggleCHecked}
-        onRemove={() => {}}
-        className={styles.outer}>
-        <label className={styles.taskLabel}>
-          <input type='checkbox' checked={checked} onChange={() => {}} />
+    <RemovableListItem<CommonInteractivePropTypes>
+      active={true}
+      onClick={toggleCHecked}
+      onRemove={() => {}}
+      className={styles.outer}>
+      <label className={styles.taskLabel}>
+        <input type='checkbox' checked={checked} />
 
-          <span>Текст</span>
-
+        <span>
           <svg
             width='11'
             height='8'
@@ -44,43 +43,10 @@ const TaskBox: React.FC = () => {
               strokeLinejoin='round'
             />
           </svg>
-        </label>
-      </RemovableListItem>
-
-      {creatingTaskVisible ? (
-        <TaskCreatingForm onSuccess={() => {}} onDeny={toggleCreatingTaskVisible} />
-      ) : (
-        <WithIconInteractive
-          onClick={toggleCreatingTaskVisible}
-          className={styles.add}
-          iconStroked={true}
-          icon={
-            <svg
-              width='16'
-              height='16'
-              viewBox='0 0 16 16'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'>
-              <path
-                d='M8 1V15'
-                stroke='black'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-              <path
-                d='M1 8H15'
-                stroke='black'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-              />
-            </svg>
-          }>
-          Добавить задачу
-        </WithIconInteractive>
-      )}
-    </>
+          {text}
+        </span>
+      </label>
+    </RemovableListItem>
   )
 }
 

@@ -1,7 +1,10 @@
 import React from 'react'
 import TaskBox from '../Input/TaskBox'
+import { TaskList } from '../List'
 
 import styles from './Styles.module.css'
+
+import { tasks } from '../../assets/imdb.json'
 
 const Main: React.FC = () => {
   return (
@@ -27,7 +30,7 @@ const Main: React.FC = () => {
         </button>
       </h2>
 
-      <TaskBox />
+      <TaskList list={tasks} />
     </main>
   )
 }
