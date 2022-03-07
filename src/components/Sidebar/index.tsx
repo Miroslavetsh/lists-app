@@ -16,7 +16,7 @@ import styles from './Styles.module.css'
 const Sidebar: React.FC = () => {
   const [toDoItems, setToDoItems] = useState<Array<ToDoList>>([])
   const [availableColors, setAvailableColors] = useState<Array<Color>>([DEFAULT_COLOR])
-  const [activeItemIndex, setActiveItemIndex] = useState<number>(3)
+  const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
   useEffect(() => {

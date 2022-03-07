@@ -6,25 +6,31 @@ import { TaskList } from '../List'
 
 import ToDoList from '../../models/ToDoList'
 import Task from '../../models/Task'
+import Color from '../../models/Color'
 import getApiPath from '../../utils/getApiPath'
 
 import styles from './Styles.module.css'
 
 const Main: React.FC = () => {
-  const [expandedTasks, setExpandedTasks] = useState<Array<Task & { list: ToDoList }>>([])
+  const [expandedLists, setExpandedLists] = useState<
+    Array<ToDoList & { color: Color; tasks: Array<Task> }>
+  >([])
+  const [currentTitleColor, setCurrentTitleColor] = useState<string>('')
   const [currentListName, setCurrentListName] = useState<string>('Загружаемса...')
   const [isHeadingEditable, setIsHeadingEditable] = useState<boolean>(false)
 
   useEffect(() => {
     axios
-      .get(getApiPath('tasks'), {
+      .get(getApiPath('lists'), {
         params: {
-          _expand: 'list',
+          _expand: 'color',
+          _embed: 'tasks',
         },
       })
       .then(({ data }) => {
-        setCurrentListName(data[0].list.name)
-        setExpandedTasks(data)
+        setCurrentTitleColor(data[0].color.hex)
+        setCurrentListName(data[0].name)
+        setExpandedLists(data)
       })
   }, [])
 
@@ -40,7 +46,7 @@ const Main: React.FC = () => {
     <main className={styles.main}>
       <h2
         style={{
-          backgroundColor: '#28456C',
+          backgroundColor: currentTitleColor,
         }}
         className={styles.heading}>
         <ContentEditable
@@ -65,7 +71,9 @@ const Main: React.FC = () => {
         </button>
       </h2>
 
-      <TaskList list={expandedTasks} />
+      {expandedLists && expandedLists[0] && expandedLists[0].tasks && (
+        <TaskList list={expandedLists[0].tasks} />
+      )}
     </main>
   )
 }
