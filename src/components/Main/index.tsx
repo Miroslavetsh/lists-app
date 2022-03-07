@@ -1,12 +1,24 @@
-import React from 'react'
-import TaskBox from '../Input/TaskBox'
+import React, { useEffect, useState } from 'react'
+
 import { TaskList } from '../List'
+
+import Task from '../../models/Task'
 
 import styles from './Styles.module.css'
 
-import { tasks } from '../../assets/imdb.json'
+const URL = (process.env.REACT_APP_API_URL || 'localhost:3001/') + 'tasks'
 
 const Main: React.FC = () => {
+  const [tasks, setTasks] = useState<Array<Task>>([])
+
+  useEffect(() => {
+    fetch(URL)
+      .then((response) => response.json())
+      .then((data) => {
+        setTasks(data)
+      })
+  }, [])
+
   return (
     <main className={styles.main}>
       <h2
