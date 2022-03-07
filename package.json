@@ -1,5 +1,5 @@
 {
-  "name": "best-n-top-pizza-shop",
+  "name": "lists-app",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Miroslavetsh/best-n-top-pizza-shop.git"
+    "url": "git+https://github.com/Miroslavetsh/lists-app.git"
   },
   "author": "Miroslavetsh <dfgshte@gmail.com>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Miroslavetsh/best-n-top-pizza-shop/issues"
+    "url": "https://github.com/Miroslavetsh/lists-app/issues"
   },
-  "homepage": "https://github.com/Miroslavetsh/best-n-top-pizza-shop#readme",
+  "homepage": "https://github.com/Miroslavetsh/lists-app#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.2",
