@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,regular,italic,700,700italic,900,900italic');
 @import 'assets/nullstyle.css';
 
 #root {
@@ -12,7 +13,7 @@
   color: #fff;
   display: flex;
 
-  font-family: Roboto, sans-serif;
+  font-family: Lato, sans-serif;
 }
 
 a {
