@@ -96,6 +96,7 @@ const Sidebar: React.FC = () => {
         <WithIconInteractive
           onClick={togglePopupVisible}
           className={styles.add}
+          iconStroked={true}
           icon={
             <svg
               width='16'

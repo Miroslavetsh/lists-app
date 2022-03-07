@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
+import { CommonInteractivePropTypes, WithColoredCircleInteractivePropTypes } from '../Interactive'
 
 import { ConfirmationPopup } from '../Popup'
 import CommonItem, { CommonPropTypes } from './Common'
 
 import styles from './Styles.module.css'
 
-type RemovablePropTypes = CommonPropTypes & {
+type RemovablePropTypes<T extends CommonInteractivePropTypes> = CommonPropTypes<T> & {
   onRemove: () => void
   className?: string
 }
 
-const Removable: React.FC<RemovablePropTypes> = (props) => {
-  const { onRemove, className, active, isHot, onClick, title, color, children } = props
+function Removable<T extends CommonInteractivePropTypes>(props: RemovablePropTypes<T>) {
+  const { onRemove, className, active, isHot, onClick, title, children } = props
 
   const [isConfirmationWindowVisible, setIsConfirmationWindowVisible] = useState<boolean>(false)
 
@@ -26,9 +27,21 @@ const Removable: React.FC<RemovablePropTypes> = (props) => {
   const classNames = [styles.outer]
   className && classNames.push(className)
 
-  return (
-    <div className={classNames.join(' ')}>
-      <CommonItem
+  let Item = (
+    <CommonItem<CommonInteractivePropTypes>
+      active={active}
+      isHot={isHot}
+      onClick={onClick}
+      title={title}
+      children={children}
+    />
+  )
+
+  if ('color' in props) {
+    let color = props['color']
+
+    Item = (
+      <CommonItem<WithColoredCircleInteractivePropTypes>
         active={active}
         isHot={isHot}
         onClick={onClick}
@@ -36,6 +49,12 @@ const Removable: React.FC<RemovablePropTypes> = (props) => {
         color={color}
         children={children}
       />
+    )
+  }
+
+  return (
+    <div className={classNames.join(' ')}>
+      {Item}
 
       {active && (
         <>

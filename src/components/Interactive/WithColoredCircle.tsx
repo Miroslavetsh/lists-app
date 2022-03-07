@@ -1,18 +1,17 @@
 import React from 'react'
 
-import { CommonInteractive } from '.'
-import { CommonPropTypes } from './Common'
+import { CommonInteractive, CommonInteractivePropTypes } from '.'
 
 import styles from './Styles.module.css'
 
-export type WithColoredCirclePropTypes = CommonPropTypes & {
+export interface WithColoredCirclePropTypes extends CommonInteractivePropTypes {
   color: string
 }
 
 const WithColoredCircle: React.FC<WithColoredCirclePropTypes> = (props) => {
   const { color, children } = props
 
-  const classNames = [styles.item, styles.withCircle]
+  const classNames = [styles.flexed, styles.withCircle]
 
   return (
     <div className={classNames.join(' ')}>

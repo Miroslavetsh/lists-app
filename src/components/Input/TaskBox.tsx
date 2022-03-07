@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+
 import { TaskCreatingForm } from '../Form'
-import { WithIconInteractive } from '../Interactive'
+import { CommonInteractivePropTypes, WithIconInteractive } from '../Interactive'
 import { RemovableListItem } from '../ListItem'
 
 import styles from './Styles.module.css'
@@ -19,10 +20,9 @@ const TaskBox: React.FC = () => {
 
   return (
     <>
-      <RemovableListItem
+      <RemovableListItem<CommonInteractivePropTypes>
         active={true}
         onClick={toggleCHecked}
-        color='#28456C'
         onRemove={() => {}}
         className={styles.outer}>
         <label className={styles.taskLabel}>
@@ -53,6 +53,7 @@ const TaskBox: React.FC = () => {
         <WithIconInteractive
           onClick={toggleCreatingTaskVisible}
           className={styles.add}
+          iconStroked={true}
           icon={
             <svg
               width='16'
