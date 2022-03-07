@@ -9,10 +9,11 @@ type ButtonPropTypes = {
   children?: React.ReactNode
   fullWidth?: boolean
   textCenter?: boolean
+  disabled?: boolean
 }
 
 const Button: React.FC<ButtonPropTypes> = (props) => {
-  const { color, type, onClick, children, fullWidth, textCenter } = props
+  const { color, type, onClick, children, fullWidth, textCenter, disabled } = props
 
   const classNames = [styles.button]
   fullWidth && classNames.push(styles.fullWidth)
@@ -23,6 +24,7 @@ const Button: React.FC<ButtonPropTypes> = (props) => {
       className={classNames.join(' ')}
       style={{ backgroundColor: color }}
       type={type}
+      disabled={disabled}
       onClick={onClick}>
       {children}
     </button>
@@ -33,6 +35,7 @@ Button.defaultProps = {
   children: <></>,
   fullWidth: false,
   textCenter: false,
+  disabled: false,
 }
 
 export default Button
