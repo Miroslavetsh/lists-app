@@ -26,7 +26,7 @@ const TaskBox: React.FC = () => {
         onRemove={() => {}}
         className={styles.outer}>
         <label className={styles.taskLabel}>
-          <input type='checkbox' checked={checked} />
+          <input type='checkbox' checked={checked} onChange={() => {}} />
 
           <span>Текст</span>
 
