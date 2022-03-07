@@ -26,7 +26,7 @@ const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
       onRemove={() => {}}
       className={styles.outer}>
       <label className={styles.taskLabel}>
-        <input type='checkbox' checked={checked} />
+        <input type='checkbox' checked={checked} onChange={() => {}} />
 
         <span>
           <svg
