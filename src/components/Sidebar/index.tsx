@@ -75,7 +75,7 @@ const Sidebar: React.FC = () => {
       <ul className={styles.mid}>
         {toDoItems
           .sort((a, b) => Number(b.isHot) - Number(a.isHot))
-          .map(({ name, isHot, colorId }, index) => {
+          .map(({ id, name, isHot, colorId }, index) => {
             const { hex } = availableColors.filter(({ id }) => id === colorId)[0] || DEFAULT_COLOR
 
             const text =
@@ -84,8 +84,9 @@ const Sidebar: React.FC = () => {
                 : name
 
             const onRemove = () => {
-              toDoItems.splice(index, 1)
-              setToDoItems([...toDoItems])
+              axios.delete(getApiPath('lists/') + id).then(() => {
+                setToDoItems([...toDoItems.filter((item) => item.id !== id)])
+              })
             }
 
             const Item = (
