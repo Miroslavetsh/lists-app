@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
 
-import { TaskCreatingForm } from '../Form'
 import { CommonInteractivePropTypes, WithIconInteractive } from '../Interactive'
 import { RemovableListItem } from '../ListItem'
+
+import ContentEditable from 'react-contenteditable'
 
 import Task from '../../models/Task'
 
@@ -10,25 +11,37 @@ import styles from './Styles.module.css'
 
 type TaskBoxPropTypes = Pick<Task, 'text' | 'completed'>
 
+//TODO: Добавить debounce для того, чтобы сохранять значение таски
+
 const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
   const { text, completed } = props
 
   const [checked, setChecked] = useState<boolean>(completed)
+  const [inputText, setInputText] = useState<string>(text)
 
-  const toggleCHecked = () => {
+  const toggleChecked = () => {
     setChecked(!checked)
   }
+
+  const handleInputTextChange = (e: SyntheticEvent) => {
+    console.log(e.target);
+    
+    setInputText((e.target as HTMLInputElement).value)
+  }
+
+  console.log(text);
+  
 
   return (
     <RemovableListItem<CommonInteractivePropTypes>
       active={true}
-      onClick={toggleCHecked}
+      onClick={toggleChecked}
       onRemove={() => {}}
       className={styles.outer}>
       <label className={styles.taskLabel}>
         <input type='checkbox' checked={checked} onChange={() => {}} />
 
-        <span>
+        <div className={styles.divWithIcon}>
           <svg
             width='11'
             height='8'
@@ -43,8 +56,9 @@ const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
               strokeLinejoin='round'
             />
           </svg>
-          {text}
-        </span>
+
+          <ContentEditable className={styles.textInput} html={inputText} disabled={false} onChange={handleInputTextChange} />
+        </div>
       </label>
     </RemovableListItem>
   )

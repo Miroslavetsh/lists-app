@@ -76,6 +76,7 @@
 }
 
 .taskLabel {
+  width: 100%;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -85,22 +86,37 @@
   font-size: 16px;
 }
 
-.taskLabel span {
+.taskLabel .divWithIcon {
+  width: 100%;
   position: relative;
   display: flex;
   align-items: center;
   padding-left: 20px;
 }
 
-.outer:hover span:before {
+.outer:hover .divWithIcon:before {
   background-color: #f2f2f2;
 }
 
-.taskLabel input:checked + span {
+.taskLabel input:checked + .divWithIcon {
   text-decoration: line-through;
 }
 
-.taskLabel span:before {
+.textInput {
+  line-height: 1;
+  padding-right: 8px;
+  cursor: text;
+  pointer-events: all;
+  background: transparent;
+  color: inherit;
+  width: fit-content;
+}
+
+.textInput:focus {
+  outline: none;
+}
+
+.taskLabel .divWithIcon:before {
   content: '';
   width: 20px;
   height: 20px;
@@ -117,7 +133,7 @@
   transform: translate(-170%, -50%);
 }
 
-.taskLabel input {
+.taskLabel input[type='checkbox'] {
   display: none;
 }
 
@@ -143,15 +159,15 @@
 }
 
 .outer:hover .taskLabel svg,
-.taskLabel input:checked ~ span svg {
+.taskLabel input:checked ~ .divWithIcon svg {
   opacity: 1;
 }
 
-.outer:hover input:checked ~ span svg path {
+.outer:hover input:checked ~ .divWithIcon svg path {
   stroke: #fff;
 }
 
-.taskLabel input:checked ~ span::before {
+.taskLabel input:checked ~ .divWithIcon::before {
   background-color: #2b593f;
   border-color: #2b593f;
 }
