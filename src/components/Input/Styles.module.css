@@ -151,9 +151,5 @@
 }
 
 .add {
-  cursor: pointer;
-}
-
-.add svg path {
-  stroke: #fff;
+  color: #767676;
 }

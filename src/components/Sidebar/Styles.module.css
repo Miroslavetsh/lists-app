@@ -1,7 +1,7 @@
 .sidebar {
   padding: 54px 12px 0 20px;
   height: 100%;
-  max-width: 220px;
+  max-width: 260px;
   width: 100%;
 
   border-right: 1px solid #606060;
@@ -16,22 +16,5 @@
 }
 
 .add {
-  font-weight: 500;
   color: #767676;
-  cursor: pointer;
-}
-
-.add svg {
-  width: 10px;
-  height: 10px;
-}
-
-.add svg path {
-  stroke: #868686;
-
-  transition: stroke 0.3s ease-in-out;
-}
-
-.add:hover svg path {
-  stroke: #fff;
 }
