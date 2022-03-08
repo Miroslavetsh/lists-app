@@ -21,11 +21,15 @@ const Tasks: React.FC<TaskPropTypes> = ({ list }) => {
 
   return (
     <>
-      <ul className={styles.list}>
-        {list.map(({ id, text, completed }) => {
-          return <TaskBoxInput text={text} completed={completed} key={id} />
-        })}
-      </ul>
+      {list.length ? (
+        <ul className={styles.list}>
+          {list.map(({ id, text, completed }) => {
+            return <TaskBoxInput text={text} completed={completed} key={id} />
+          })}
+        </ul>
+      ) : (
+        'Давайте добавим сюда первую таску 🐵'
+      )}
 
       {creatingTaskVisible ? (
         <TaskCreatingForm onSuccess={() => {}} onDeny={toggleCreatingTaskVisible} />
