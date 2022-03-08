@@ -2,22 +2,20 @@ import React, { ChangeEvent } from 'react'
 
 import styles from './Styles.module.css'
 
-type CheckboxPropTypes = {
+type CheckBoxPropTypes = {
   checked: boolean
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   placeholder: string
 }
 
-const CheckBox: React.FC<CheckboxPropTypes> = (props) => {
+const CheckBox: React.FC<CheckBoxPropTypes> = (props) => {
   const { checked, onChange, placeholder } = props
 
-  const classNames = [styles.label]
-
   return (
-    <label className={classNames.join('')}>
+    <label className={styles.label}>
       <input type='checkbox' checked={checked} onChange={onChange} />
 
-      <span>{checked ? placeholder + '🔥' : placeholder}</span>
+      <span>{placeholder}</span>
     </label>
   )
 }

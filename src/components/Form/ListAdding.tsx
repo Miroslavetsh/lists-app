@@ -71,6 +71,7 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ toDoLists, setToDoLists, on
   }
 
   const nameInputPlaceholder = nameValueValid ? 'Название списка' : 'Введите корректое название'
+  const checkBoxInputPlaceholder = isHotChecked ? 'Пометить как важный 🔥' : 'Пометить как важный'
 
   return (
     <CommonForm>
@@ -82,7 +83,7 @@ const ListAdding: React.FC<ListAddingPropTypes> = ({ toDoLists, setToDoLists, on
       />
 
       <CheckBoxInput
-        placeholder='Пометить как важный'
+        placeholder={checkBoxInputPlaceholder}
         checked={isHotChecked}
         onChange={handleIsHotInputChange}
       />
