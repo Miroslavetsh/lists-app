@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 
-import { TaskCreatingForm } from '../Form'
-import { WithIconInteractive } from '../Interactive'
-import { TaskBoxInput } from '../Input'
+import { TaskCreatingForm } from '@components/Form'
+import { WithIconInteractive } from '@components/Interactive'
+import { TaskBoxInput } from '@components/Input'
 
-import Task from '../../models/Task'
+import Task from '@models/Task'
 
 import styles from './Styles.module.css'
 
