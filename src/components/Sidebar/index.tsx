@@ -1,27 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { WithIconInteractive } from '../Interactive'
-import { RemovableListItem } from '../ListItem'
-import { ListAddingForm } from '../Form'
-import { CommonPopup } from '../Popup'
+import { WithIconInteractive } from '@components/Interactive'
+import { RemovableListItem } from '@components/ListItem'
+import { ListAddingForm } from '@components/Form'
+import { CommonPopup } from '@components/Popup'
 
-import ToDoList from '../../models/ToDoList'
-import Color from '../../models/Color'
-import { DEFAULT_COLOR, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '../../utils/constants'
-import getApiPath from '../../utils/getApiPath'
+import { Color, ToDoList } from '@models/index'
+
+import getApiPath from '@utils/getApiPath'
+import compareStringLength from '@utils/compareStringLength'
+
+import { DEFAULT_COLOR, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '@constants/'
 
 import styles from './Styles.module.css'
 
 const Sidebar: React.FC = () => {
-  const [toDoItems, setToDoItems] = useState<Array<ToDoList>>([])
+  const [toDoLists, setToDoLists] = useState<Array<ToDoList>>([])
   const [availableColors, setAvailableColors] = useState<Array<Color>>([DEFAULT_COLOR])
-  const [activeItemIndex, setActiveItemIndex] = useState<number>(0)
+  const [activeSidebarItemIndex, setActiveSidebarItemIndex] = useState<number>(0)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
   useEffect(() => {
     axios.get(getApiPath('lists')).then(({ data }) => {
-      setToDoItems(data)
+      setToDoLists(data)
     })
 
     axios.get(getApiPath('colors')).then(({ data }) => {
@@ -50,9 +52,9 @@ const Sidebar: React.FC = () => {
       <div className={styles.top}>
         <a href='/'>
           <WithIconInteractive
-            active={activeItemIndex === 0}
+            active={activeSidebarItemIndex === 0}
             onClick={() => {
-              setActiveItemIndex(0)
+              setActiveSidebarItemIndex(0)
             }}
             icon={
               <svg
@@ -73,35 +75,32 @@ const Sidebar: React.FC = () => {
       </div>
 
       <ul className={styles.mid}>
-        {toDoItems
+        {toDoLists // Hottest lists get higher
           .sort((a, b) => Number(b.isHot) - Number(a.isHot))
           .map(({ id, name, isHot, colorId }, index) => {
-            const { hex } = availableColors.filter(({ id }) => id === colorId)[0] || DEFAULT_COLOR
-
-            const text =
-              name.length > MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH
-                ? name.slice(0, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH - 3) + '...'
-                : name
+            const nextItemIndex = index + 1
+            const comparedName = compareStringLength(name, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH)
+            const { hex } = availableColors.find(({ id }) => id === colorId) || DEFAULT_COLOR
 
             const onRemove = () => {
-              axios.delete(getApiPath('lists/') + id).then(() => {
-                setToDoItems([...toDoItems.filter((item) => item.id !== id)])
+              axios.delete(getApiPath(`lists/${id}`)).then(() => {
+                setToDoLists([...toDoLists.filter((item) => item.id !== id)])
               })
             }
 
-            const Item = (
+            const ListItem = (
               <RemovableListItem
-                onRemove={onRemove}
-                onClick={() => setActiveItemIndex(index + 1)}
-                active={index + 1 === activeItemIndex}
-                color={hex}
-                children={text}
-                isHot={isHot}
                 title={name}
+                color={hex}
+                isHot={isHot}
+                active={nextItemIndex === activeSidebarItemIndex}
+                onClick={() => setActiveSidebarItemIndex(nextItemIndex)}
+                onRemove={onRemove}
+                children={comparedName}
               />
             )
 
-            return <React.Fragment key={name}>{Item}</React.Fragment>
+            return <React.Fragment key={name}>{ListItem}</React.Fragment>
           })}
       </ul>
 
@@ -138,8 +137,8 @@ const Sidebar: React.FC = () => {
 
         <CommonPopup visible={popupAddListVisible} onClose={hideAddListPopup} locked={false}>
           <ListAddingForm
-            toDoItems={toDoItems}
-            setToDoItems={setToDoItems}
+            toDoLists={toDoLists}
+            setToDoLists={setToDoLists}
             onAdd={hideAddListPopup}
           />
         </CommonPopup>
