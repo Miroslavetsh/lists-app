@@ -13,6 +13,7 @@ type CreateTaskPropTypes = {
 
 const CreateTask: React.FC<CreateTaskPropTypes> = (props) => {
   const { onSuccess, onDeny } = props
+
   const [name, setName] = useState<string>('')
 
   return (
