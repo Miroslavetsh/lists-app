@@ -2,12 +2,12 @@ import React, { SyntheticEvent, useEffect, useState } from 'react'
 import axios from 'axios'
 import ContentEditable from 'react-contenteditable'
 
-import { TaskList } from '../List'
+import { TaskList } from '@components/List'
 
-import ToDoList from '../../models/ToDoList'
-import Task from '../../models/Task'
-import Color from '../../models/Color'
-import getApiPath from '../../utils/getApiPath'
+import ToDoList from '@models/ToDoList'
+import Task from '@models/Task'
+import Color from '@models/Color'
+import getApiPath from '@utils/getApiPath'
 
 import styles from './Styles.module.css'
 
@@ -15,7 +15,7 @@ const Main: React.FC = () => {
   const [expandedLists, setExpandedLists] = useState<
     Array<ToDoList & { color: Color; tasks: Array<Task> }>
   >([])
-  const [currentTitleColor, setCurrentTitleColor] = useState<string>('')
+  const [currentTitleColor, setCurrentTitleColor] = useState<string>('#000')
   const [currentListName, setCurrentListName] = useState<string>('Загружаемса...')
   const [isHeadingEditable, setIsHeadingEditable] = useState<boolean>(false)
 
@@ -34,6 +34,7 @@ const Main: React.FC = () => {
       })
   }, [])
 
+  //TODO: апдейт имени по ченджу + debounce
   const handleCurrentListNameChange = (e: SyntheticEvent) => {
     setCurrentListName((e.target as HTMLInputElement).value)
   }
@@ -71,9 +72,7 @@ const Main: React.FC = () => {
         </button>
       </h2>
 
-      {expandedLists && expandedLists[0] && expandedLists[0].tasks && (
-        <TaskList list={expandedLists[0].tasks} />
-      )}
+      {expandedLists.length && <TaskList list={expandedLists[0].tasks} />}
     </main>
   )
 }
