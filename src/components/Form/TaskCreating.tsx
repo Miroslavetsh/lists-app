@@ -11,9 +11,8 @@ type CreateTaskPropTypes = {
   onDeny: () => void
 }
 
-const CreateTask: React.FC<CreateTaskPropTypes> = (props) => {
-  const { onSuccess, onDeny } = props
-
+// FIXME: Сделать валидацию, точнее даже целый хук с валидацией
+const CreateTask: React.FC<CreateTaskPropTypes> = ({ onSuccess, onDeny }) => {
   const [name, setName] = useState<string>('')
 
   return (
