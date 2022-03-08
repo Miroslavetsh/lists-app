@@ -6,7 +6,7 @@
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
-.item.active {
+.active {
   background: #232323;
   color: #fff;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
