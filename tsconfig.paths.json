@@ -5,7 +5,8 @@
       "@components/*": ["components/*"],
       "@models/*": ["models/*"],
       "@utils/*": ["utils/*"],
-      "@hooks/*": ["utils/hooks/*"]
+      "@hooks/*": ["utils/hooks/*"],
+      "@constants/*": ["utils/constants.ts"]
     }
   }
 }
