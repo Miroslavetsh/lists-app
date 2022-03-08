@@ -1,40 +1,39 @@
-import React, { ChangeEvent, SyntheticEvent, useState } from 'react'
-
-import { CommonInteractivePropTypes, WithIconInteractive } from '../Interactive'
-import { RemovableListItem } from '../ListItem'
-
+import React, { SyntheticEvent, useState } from 'react'
 import ContentEditable from 'react-contenteditable'
 
-import Task from '../../models/Task'
+import { CommonInteractivePropTypes } from '@components/Interactive'
+import { RemovableListItem } from '@components/ListItem'
+
+import Task from '@models/Task'
 
 import styles from './Styles.module.css'
 
 type TaskBoxPropTypes = Pick<Task, 'text' | 'completed'>
 
-//TODO: Добавить debounce для того, чтобы сохранять значение таски
+// TODO: Добавить debounce для того, чтобы сохранять значение таски
+// учесть issue с стейтом, мб заменить на useRef
+// И учесть невозможность пустого поля
 
-const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
-  const { text, completed } = props
+const TaskBox: React.FC<TaskBoxPropTypes> = ({ text, completed }) => {
+  const [taskCompleted, setTaskCompleted] = useState<boolean>(completed)
+  const [taskInputText, setTaskInputText] = useState<string>(text)
 
-  const [checked, setChecked] = useState<boolean>(completed)
-  const [inputText, setInputText] = useState<string>(text)
-
-  const toggleChecked = () => {
-    setChecked(!checked)
+  const toggleTackCompletedChecked = () => {
+    setTaskCompleted(!taskCompleted)
   }
 
-  const handleInputTextChange = (e: SyntheticEvent) => {
-    setInputText((e.target as HTMLInputElement).value)
+  const handleTaskInputTextChange = (e: SyntheticEvent) => {
+    setTaskInputText((e.target as HTMLInputElement).value)
   }
 
   return (
     <RemovableListItem<CommonInteractivePropTypes>
       active={true}
-      onClick={toggleChecked}
+      onClick={toggleTackCompletedChecked}
       onRemove={() => {}}
       className={styles.outer}>
       <label className={styles.taskLabel}>
-        <input type='checkbox' checked={checked} onChange={() => {}} />
+        <input type='checkbox' checked={taskCompleted} readOnly />
 
         <div className={styles.divWithIcon}>
           <svg
@@ -54,9 +53,9 @@ const TaskBox: React.FC<TaskBoxPropTypes> = (props) => {
 
           <ContentEditable
             className={styles.textInput}
-            html={inputText}
+            html={taskInputText}
             disabled={false}
-            onChange={handleInputTextChange}
+            onChange={handleTaskInputTextChange}
           />
         </div>
       </label>
