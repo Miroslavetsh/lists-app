@@ -1,7 +1,7 @@
 import React, { KeyboardEvent, useEffect, useRef, useState } from 'react'
 import 'wicg-inert'
 
-import Portal from '../Portal'
+import Portal from '@components/Portal'
 
 import styles from './Styles.module.css'
 
@@ -23,13 +23,13 @@ const Common: React.FC<CommonPropTypes> = (props) => {
 
     const transitionEnd = () => setActive(visible)
 
-    const keyHandler: EventListener = (e) => {
-      if (!locked && [27].indexOf((e as unknown as KeyboardEvent<HTMLDivElement>).which) >= 0) {
+    const closePopupOnEsc: EventListener = (e) => {
+      if (!locked && [27].indexOf(((e as unknown) as KeyboardEvent<HTMLDivElement>).which) >= 0) {
         typeof onClose === 'function' && onClose()
       }
     }
 
-    const clickHandler: EventListener = (e) => {
+    const handleClick: EventListener = (e) => {
       if (!locked && e.target === current) {
         typeof onClose === 'function' && onClose()
       }
@@ -37,8 +37,8 @@ const Common: React.FC<CommonPropTypes> = (props) => {
 
     if (current) {
       current.addEventListener('transitionend', transitionEnd)
-      current.addEventListener('click', clickHandler)
-      window.addEventListener('keyup', keyHandler)
+      current.addEventListener('click', handleClick)
+      window.addEventListener('keyup', closePopupOnEsc)
     }
 
     const activeElement = document.activeElement as HTMLElement
@@ -57,11 +57,11 @@ const Common: React.FC<CommonPropTypes> = (props) => {
     return () => {
       if (current) {
         current.removeEventListener('transitionend', transitionEnd)
-        current.removeEventListener('click', clickHandler)
+        current.removeEventListener('click', handleClick)
       }
 
       rootElement.removeAttribute('inert')
-      window.removeEventListener('keyup', keyHandler)
+      window.removeEventListener('keyup', closePopupOnEsc)
     }
   }, [visible, locked, onClose])
 

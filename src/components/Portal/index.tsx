@@ -27,4 +27,8 @@ const Portal: React.FC<PortalPropTypes> = ({ children, parent, className }) => {
   return ReactDOM.createPortal(children, element)
 }
 
+Portal.defaultProps = {
+  className: '',
+}
+
 export default Portal
