@@ -96,7 +96,7 @@ const Sidebar: React.FC = () => {
                 active={nextItemIndex === activeSidebarItemIndex}
                 onClick={() => setActiveSidebarItemIndex(nextItemIndex)}
                 onRemove={onRemove}
-                children={comparedName}
+                children={isHot ? comparedName + '🔥' : comparedName}
               />
             )
 

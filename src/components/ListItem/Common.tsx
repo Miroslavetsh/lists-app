@@ -4,7 +4,7 @@ import {
   CommonInteractive,
   CommonInteractivePropTypes,
   WithColoredCircleInteractive,
-} from '../Interactive'
+} from '@components/Interactive'
 
 import styles from './Styles.module.css'
 
@@ -22,22 +22,20 @@ function Common<T extends CommonInteractivePropTypes>(props: CommonPropTypes<T>)
   active && classNames.push(styles.active)
   isHot && classNames.push(styles.hot)
 
-  const conditionalChildren = isHot ? children + '🔥' : children
-
   let color = ''
   if ('color' in props && props['color']) {
     color = props['color']
 
     return (
       <li title={title} onClick={onClick} className={classNames.join(' ')}>
-        <WithColoredCircleInteractive children={conditionalChildren} color={color} />
+        <WithColoredCircleInteractive children={children} color={color} />
       </li>
     )
   }
 
   return (
     <li title={title} onClick={onClick} className={classNames.join(' ')}>
-      <CommonInteractive children={conditionalChildren} />
+      <CommonInteractive children={children} />
     </li>
   )
 }

@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
-import { CommonInteractivePropTypes, WithColoredCircleInteractivePropTypes } from '../Interactive'
 
-import { ConfirmationPopup } from '../Popup'
 import CommonItem, { CommonPropTypes } from './Common'
+import { ConfirmationPopup } from '@components/Popup'
+import {
+  CommonInteractivePropTypes,
+  WithColoredCircleInteractivePropTypes,
+} from '@components/Interactive'
 
 import styles from './Styles.module.css'
 
