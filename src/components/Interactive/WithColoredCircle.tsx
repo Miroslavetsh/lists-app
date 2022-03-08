@@ -8,9 +8,7 @@ export interface WithColoredCirclePropTypes extends CommonInteractivePropTypes {
   color: string
 }
 
-const WithColoredCircle: React.FC<WithColoredCirclePropTypes> = (props) => {
-  const { color, children } = props
-
+const WithColoredCircle: React.FC<WithColoredCirclePropTypes> = ({ color, children }) => {
   const classNames = [styles.flexed, styles.withCircle]
 
   return (
