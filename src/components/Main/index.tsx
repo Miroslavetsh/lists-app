@@ -97,7 +97,7 @@ const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) =>
             <TaskList
               listId={currentListId}
               list={Array.isArray(currentTasks) ? currentTasks : []}
-              setList={setCurrentTasks}  
+              setList={setCurrentTasks}
             />
           )}
         </>
