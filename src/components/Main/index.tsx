@@ -16,11 +16,13 @@ type MainPropTypes = Pick<SidebarPropTypes, 'activeItemId'>
 
 type ExpandedList = ToDoList & { color: Color; tasks: Array<Task> }
 
+// FIXME: сделать useReducer чтобы не хранить такую кучу состояний
 const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) => {
   const [expandedLists, setExpandedLists] = useState<Array<ExpandedList>>([])
-  const [tasks, setTasks] = useState<Array<Task>>([])
+  const [currentTasks, setCurrentTasks] = useState<Array<Task>>([])
   const [currentTitleColor, setCurrentTitleColor] = useState<string>('#000')
   const [currentListName, setCurrentListName] = useState<string>('Загружаемса...')
+  const [currentListId, setCurrentListId] = useState<number>(0)
   const [isHeadingEditable, setIsHeadingEditable] = useState<boolean>(false)
 
   useEffect(() => {
@@ -37,12 +39,15 @@ const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) =>
   }, [activeSidebarItemId])
 
   useEffect(() => {
-    if (expandedLists.filter(({ id }) => id === activeSidebarItemId)[0]) {
-      const currentExpandedList = expandedLists.filter(({ id }) => id === activeSidebarItemId)[0]
+    const compare: (list: ExpandedList) => boolean = ({ id }) => id === activeSidebarItemId
 
-      setTasks(currentExpandedList.tasks)
-      setCurrentTitleColor(currentExpandedList.color.hex)
-      setCurrentListName(currentExpandedList.name)
+    if (expandedLists.filter(compare)[0]) {
+      const { tasks, color, name, id } = expandedLists.filter(compare)[0]
+
+      setCurrentTasks(tasks)
+      setCurrentTitleColor(color.hex)
+      setCurrentListName(name)
+      setCurrentListId(id)
     }
   }, [expandedLists])
 
@@ -88,7 +93,13 @@ const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) =>
             </button>
           </h2>
 
-          {expandedLists.length && <TaskList list={Array.isArray(tasks) ? tasks : []} />}
+          {expandedLists.length && (
+            <TaskList
+              listId={currentListId}
+              list={Array.isArray(currentTasks) ? currentTasks : []}
+              setList={setCurrentTasks}  
+            />
+          )}
         </>
       )}
     </main>

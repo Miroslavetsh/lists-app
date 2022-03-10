@@ -9,14 +9,21 @@ import Task from '@models/Task'
 import styles from './Styles.module.css'
 
 type TaskPropTypes = {
+  listId: number
   list: Array<Task>
+  setList: (item: Array<Task>) => void
 }
 
-const Tasks: React.FC<TaskPropTypes> = ({ list }) => {
+const Tasks: React.FC<TaskPropTypes> = ({ listId, list, setList }) => {
   const [taskAddingVisible, setTaskAddingVisible] = useState<boolean>(false)
 
-  const toggleTaskAddingVisible = () => {
+  const toggleTaskAddingVisibility = () => {
     setTaskAddingVisible(!taskAddingVisible)
+  }
+
+  const onTaskAdding = (newTask: Task) => {
+    toggleTaskAddingVisibility()
+    setList([...list, newTask])
   }
 
   return (
@@ -28,14 +35,18 @@ const Tasks: React.FC<TaskPropTypes> = ({ list }) => {
           })}
         </ul>
       ) : (
-        'Давайте добавим сюда первую таску 🐵'
+        <div className={styles.emptyList}>Давайте добавим сюда первую таску 🐵</div>
       )}
 
       {taskAddingVisible ? (
-        <TaskAddingForm onSuccess={() => {}} onDeny={toggleTaskAddingVisible} />
+        <TaskAddingForm
+          listId={listId}
+          onSuccess={onTaskAdding}
+          onDeny={toggleTaskAddingVisibility}
+        />
       ) : (
         <WithIconInteractive
-          onClick={toggleTaskAddingVisible}
+          onClick={toggleTaskAddingVisibility}
           className={styles.add}
           iconStroked={true}
           icon={

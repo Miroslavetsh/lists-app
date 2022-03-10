@@ -13,7 +13,6 @@ type TaskBoxPropTypes = Pick<Task, 'text' | 'completed'>
 // TODO: Добавить debounce для того, чтобы сохранять значение таски
 // учесть issue с стейтом, мб заменить на useRef
 // И учесть невозможность пустого поля
-
 const TaskBox: React.FC<TaskBoxPropTypes> = ({ text, completed }) => {
   const [taskCompleted, setTaskCompleted] = useState<boolean>(completed)
   const [taskInputText, setTaskInputText] = useState<string>(text)
@@ -26,11 +25,13 @@ const TaskBox: React.FC<TaskBoxPropTypes> = ({ text, completed }) => {
     setTaskInputText((e.target as HTMLInputElement).value)
   }
 
+  const removeTask = () => {}
+
   return (
     <RemovableListItem<CommonInteractivePropTypes>
       active={true}
       onClick={toggleTackCompletedChecked}
-      onRemove={() => {}}
+      onRemove={removeTask}
       className={styles.outer}>
       <label className={styles.taskLabel}>
         <input type='checkbox' checked={taskCompleted} readOnly />
