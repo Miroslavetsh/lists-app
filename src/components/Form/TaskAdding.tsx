@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 
 import Common from './Common'
-import { CommonInput } from '../Input'
-import Button from '../Button'
+import { CommonInput } from '@components/Input'
+import Button from '@components/Button'
 
 import styles from './Styles.module.css'
 
