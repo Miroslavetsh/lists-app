@@ -1,8 +1,13 @@
-.list {
+.list,
+.emptyList {
   margin-bottom: 12px;
   max-height: 420px;
   overflow-y: auto;
   padding-right: 8px;
+}
+
+.emptyList {
+  overflow-y: unset;
 }
 
 .list::-webkit-scrollbar {

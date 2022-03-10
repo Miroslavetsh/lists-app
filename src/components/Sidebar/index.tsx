@@ -15,10 +15,14 @@ import { DEFAULT_COLOR, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH } from '@constants/'
 
 import styles from './Styles.module.css'
 
-const Sidebar: React.FC = () => {
+export type SidebarPropTypes = {
+  activeItemId: number
+  setActiveItemId: (index: number) => void
+}
+
+const Sidebar: React.FC<SidebarPropTypes> = ({ activeItemId, setActiveItemId }) => {
   const [toDoLists, setToDoLists] = useState<Array<ToDoList>>([])
   const [availableColors, setAvailableColors] = useState<Array<Color>>([DEFAULT_COLOR])
-  const [activeSidebarItemIndex, setActiveSidebarItemIndex] = useState<number>(0)
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
   useEffect(() => {
@@ -52,9 +56,9 @@ const Sidebar: React.FC = () => {
       <div className={styles.top}>
         <a href='/'>
           <WithIconInteractive
-            active={activeSidebarItemIndex === 0}
+            active={activeItemId === 0}
             onClick={() => {
-              setActiveSidebarItemIndex(0)
+              setActiveItemId(0)
             }}
             icon={
               <svg
@@ -77,8 +81,7 @@ const Sidebar: React.FC = () => {
       <ul className={styles.mid}>
         {toDoLists // Hottest lists get higher
           .sort((a, b) => Number(b.isHot) - Number(a.isHot))
-          .map(({ id, name, isHot, colorId }, index) => {
-            const nextItemIndex = index + 1
+          .map(({ id, name, isHot, colorId }) => {
             const comparedName = compareStringLength(name, MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH)
             const { hex } = availableColors.find(({ id }) => id === colorId) || DEFAULT_COLOR
 
@@ -93,8 +96,8 @@ const Sidebar: React.FC = () => {
                 title={name}
                 color={hex}
                 isHot={isHot}
-                active={nextItemIndex === activeSidebarItemIndex}
-                onClick={() => setActiveSidebarItemIndex(nextItemIndex)}
+                active={id === activeItemId}
+                onClick={() => setActiveItemId(id)}
                 onRemove={onRemove}
                 children={isHot ? comparedName + '🔥' : comparedName}
               />
