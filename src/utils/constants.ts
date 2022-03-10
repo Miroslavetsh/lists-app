@@ -1,4 +1,4 @@
-export const MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH = 14
+export const MAXIMUM_SIDEBAR_ITEM_TEXT_LENGTH = 17
 
 export const DEFAULT_COLOR = {
   id: 1,
