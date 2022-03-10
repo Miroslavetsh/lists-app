@@ -6,13 +6,13 @@ import Button from '../Button'
 
 import styles from './Styles.module.css'
 
-type CreateTaskPropTypes = {
+type TaskAddingPropTypes = {
   onSuccess: () => void
   onDeny: () => void
 }
 
 // FIXME: Сделать валидацию, точнее даже целый хук с валидацией
-const CreateTask: React.FC<CreateTaskPropTypes> = ({ onSuccess, onDeny }) => {
+const TaskAdding: React.FC<TaskAddingPropTypes> = ({ onSuccess, onDeny }) => {
   const [name, setName] = useState<string>('')
 
   return (
@@ -34,4 +34,4 @@ const CreateTask: React.FC<CreateTaskPropTypes> = ({ onSuccess, onDeny }) => {
   )
 }
 
-export default CreateTask
+export default TaskAdding

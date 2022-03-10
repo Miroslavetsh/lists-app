@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { TaskCreatingForm } from '@components/Form'
+import { TaskAddingForm } from '@components/Form'
 import { WithIconInteractive } from '@components/Interactive'
 import { TaskBoxInput } from '@components/Input'
 
@@ -13,10 +13,10 @@ type TaskPropTypes = {
 }
 
 const Tasks: React.FC<TaskPropTypes> = ({ list }) => {
-  const [creatingTaskVisible, setCreatingTaskVisible] = useState<boolean>(false)
+  const [taskAddingVisible, setTaskAddingVisible] = useState<boolean>(false)
 
-  const toggleCreatingTaskVisible = () => {
-    setCreatingTaskVisible(!creatingTaskVisible)
+  const toggleTaskAddingVisible = () => {
+    setTaskAddingVisible(!taskAddingVisible)
   }
 
   return (
@@ -31,11 +31,11 @@ const Tasks: React.FC<TaskPropTypes> = ({ list }) => {
         'Давайте добавим сюда первую таску 🐵'
       )}
 
-      {creatingTaskVisible ? (
-        <TaskCreatingForm onSuccess={() => {}} onDeny={toggleCreatingTaskVisible} />
+      {taskAddingVisible ? (
+        <TaskAddingForm onSuccess={() => {}} onDeny={toggleTaskAddingVisible} />
       ) : (
         <WithIconInteractive
-          onClick={toggleCreatingTaskVisible}
+          onClick={toggleTaskAddingVisible}
           className={styles.add}
           iconStroked={true}
           icon={
