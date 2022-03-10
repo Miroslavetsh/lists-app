@@ -39,7 +39,7 @@ const Sidebar: React.FC = () => {
     setPopupAddListVisible(false)
   }
 
-  const togglePopupVisible = () => {
+  const togglePopupVisibility = () => {
     if (popupAddListVisible) {
       hideAddListPopup()
     } else {
@@ -106,7 +106,7 @@ const Sidebar: React.FC = () => {
 
       <div>
         <WithIconInteractive
-          onClick={togglePopupVisible}
+          onClick={togglePopupVisibility}
           className={styles.add}
           iconStroked={true}
           icon={
