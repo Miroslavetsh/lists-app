@@ -22,6 +22,18 @@
   transform: translate(50%, -50%) scale(1);
 }
 
+.heading.editable .edit {
+  opacity: 1;
+
+  transform: translate(50%, -50%) scale(1);
+}
+
+.heading.editable .edit svg path {
+  fill: none;
+
+  stroke: #08D11C;
+}
+
 .edit {
   position: absolute;
   top: 0;
