@@ -12,12 +12,16 @@ import getApiPath from '@utils/getApiPath'
 
 import styles from './Styles.module.css'
 
-type MainPropTypes = Pick<SidebarPropTypes, 'activeItemId'>
+type MainPropTypes = Pick<SidebarPropTypes, 'activeItemId' | 'toDoLists' | 'setToDoLists'>
 
 type ExpandedList = ToDoList & { color: Color; tasks: Array<Task> }
 
 // FIXME: сделать useReducer чтобы не хранить такую кучу состояний
-const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) => {
+const Main: React.FC<MainPropTypes> = ({
+  activeItemId: activeSidebarItemId,
+  toDoLists,
+  setToDoLists,
+}) => {
   const [expandedLists, setExpandedLists] = useState<Array<ExpandedList>>([])
   const [currentTasks, setCurrentTasks] = useState<Array<Task>>([])
   const [currentTitleColor, setCurrentTitleColor] = useState<string>('#000')
@@ -51,12 +55,29 @@ const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) =>
     }
   }, [expandedLists])
 
-  //TODO: апдейт имени по ченджу + debounce
   const handleCurrentListNameChange = (e: SyntheticEvent) => {
     setCurrentListName((e.target as HTMLInputElement).value)
   }
 
   const handleChangeButtonClick = () => {
+    if (isHeadingEditable) {
+      setToDoLists([
+        ...toDoLists.map((item) => {
+          if (item.id === currentListId) {
+            item.name = currentListName
+          }
+
+          return item
+        }),
+      ])
+
+      axios.patch(getApiPath(`lists/${currentListId}`), {
+        name: currentListName,
+      }).catch(() => {
+        //TODO: сделать уведомление о том, что не переименовалось
+      })
+    }
+
     setIsHeadingEditable(!isHeadingEditable)
   }
 
@@ -81,6 +102,7 @@ const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) =>
               onChange={handleCurrentListNameChange}
             />
 
+            {/* TODO: лоадер на кнопку и типа крестика если не удалось запостить или невалидное значение */}
             <button type='button' className={styles.edit} onClick={handleChangeButtonClick}>
               {isHeadingEditable ? (
                 <svg
@@ -92,9 +114,9 @@ const Main: React.FC<MainPropTypes> = ({ activeItemId: activeSidebarItemId }) =>
                   <path
                     d='M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001'
                     stroke='white'
-                    stroke-width='1.5'
-                    stroke-linecap='round'
-                    stroke-linejoin='round'
+                    strokeWidth='1.5'
+                    strokeLinecap='round'
+                    strokeLinejoin='round'
                   />
                 </svg>
               ) : (

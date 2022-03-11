@@ -18,10 +18,16 @@ import styles from './Styles.module.css'
 export type SidebarPropTypes = {
   activeItemId: number
   setActiveItemId: (index: number) => void
+  toDoLists: Array<ToDoList>
+  setToDoLists: (item: Array<ToDoList>) => void
 }
 
-const Sidebar: React.FC<SidebarPropTypes> = ({ activeItemId, setActiveItemId }) => {
-  const [toDoLists, setToDoLists] = useState<Array<ToDoList>>([])
+const Sidebar: React.FC<SidebarPropTypes> = ({
+  activeItemId,
+  setActiveItemId,
+  toDoLists,
+  setToDoLists,
+}) => {
   const [availableColors, setAvailableColors] = useState<Array<Color>>([DEFAULT_COLOR])
   const [popupAddListVisible, setPopupAddListVisible] = useState<boolean>(false)
 
@@ -103,7 +109,7 @@ const Sidebar: React.FC<SidebarPropTypes> = ({ activeItemId, setActiveItemId }) 
               />
             )
 
-            return <React.Fragment key={name}>{ListItem}</React.Fragment>
+            return <React.Fragment key={id}>{ListItem}</React.Fragment>
           })}
       </ul>
 
