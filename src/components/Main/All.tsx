@@ -33,7 +33,7 @@ const Main: React.FC = () => {
       {expandedLists.map((item) => (
         <>
           {
-            <div>
+            <div style={{display: 'flex', flexDirection: 'column'}}>
               <h2
                 style={{
                   backgroundColor: item.color.hex,

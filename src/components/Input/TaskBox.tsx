@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useState } from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import ContentEditable from 'react-contenteditable'
 import axios from 'axios'
 
@@ -7,27 +7,33 @@ import { CommonListItem, RemovableListItem } from '@components/ListItem'
 
 import Task from '@models/Task'
 
-import styles from './Styles.module.css'
+import useDebounce from '@utils/hooks/useDebounce'
 import getApiPath from '@utils/getApiPath'
+
+import styles from './Styles.module.css'
 
 type TaskBoxPropTypes = Pick<Task, 'id' | 'text' | 'completed'> & {
   onRemove?: (id: number) => void
 }
 
-// TODO: Добавить debounce для того, чтобы сохранять значение таски
-// учесть issue с стейтом, мб заменить на useRef
-// И учесть невозможность пустого поля
+// TODO: учесть невозможность пустого поля
 const TaskBox: React.FC<TaskBoxPropTypes> = ({ id, text, completed, onRemove }) => {
   const [taskCompleted, setTaskCompleted] = useState<boolean>(completed)
   const [taskInputText, setTaskInputText] = useState<string>(text)
+  const debouncedTaskInputText = useDebounce(taskInputText, 500)
 
   const toggleTackCompletedChecked = () => {
+    axios.patch(getApiPath(`tasks/${id}`), { completed: !taskCompleted })
     setTaskCompleted(!taskCompleted)
   }
 
   const handleTaskInputTextChange = (e: SyntheticEvent) => {
     setTaskInputText((e.target as HTMLInputElement).value)
   }
+
+  useEffect(() => {
+    axios.patch(getApiPath(`tasks/${id}`), { text: debouncedTaskInputText })
+  }, [debouncedTaskInputText, id])
 
   if (!onRemove) {
     return (
