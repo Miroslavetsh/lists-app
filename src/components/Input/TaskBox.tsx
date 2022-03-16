@@ -3,7 +3,7 @@ import ContentEditable from 'react-contenteditable'
 import axios from 'axios'
 
 import { CommonInteractivePropTypes } from '@components/Interactive'
-import { RemovableListItem } from '@components/ListItem'
+import { CommonListItem, RemovableListItem } from '@components/ListItem'
 
 import Task from '@models/Task'
 
@@ -27,6 +27,43 @@ const TaskBox: React.FC<TaskBoxPropTypes> = ({ id, text, completed, onRemove }) 
 
   const handleTaskInputTextChange = (e: SyntheticEvent) => {
     setTaskInputText((e.target as HTMLInputElement).value)
+  }
+
+  if (!onRemove) {
+    return (
+      <CommonListItem<CommonInteractivePropTypes>
+        active={true}
+        onClick={toggleTackCompletedChecked}
+        className={styles.outer}>
+        <label className={styles.taskLabel}>
+          <input type='checkbox' checked={taskCompleted} readOnly />
+
+          <div className={styles.divWithIcon}>
+            <svg
+              width='11'
+              height='8'
+              viewBox='0 0 11 8'
+              fill='none'
+              xmlns='http://www.w3.org/2000/svg'>
+              <path
+                d='M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001'
+                stroke='white'
+                strokeWidth='1.5'
+                strokeLinecap='round'
+                strokeLinejoin='round'
+              />
+            </svg>
+
+            <ContentEditable
+              className={styles.textInput}
+              html={taskInputText}
+              disabled={false}
+              onChange={handleTaskInputTextChange}
+            />
+          </div>
+        </label>
+      </CommonListItem>
+    )
   }
 
   const removeTask = () => {
@@ -75,10 +112,6 @@ const TaskBox: React.FC<TaskBoxPropTypes> = ({ id, text, completed, onRemove }) 
       </label>
     </RemovableListItem>
   )
-}
-
-TaskBox.defaultProps = {
-  onRemove: () => {},
 }
 
 export default TaskBox

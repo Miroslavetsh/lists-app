@@ -45,6 +45,10 @@
   stroke: #08d11c;
 }
 
+.list {
+  padding-right: 8px;
+}
+
 .edit {
   position: absolute;
   top: 0;

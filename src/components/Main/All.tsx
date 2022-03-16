@@ -52,9 +52,11 @@ const Main: React.FC<MainPropTypes> = ({
               </h2>
 
               {item.tasks.length ? (
-                item.tasks.map(({ id, text, completed }) => {
-                  return <TaskBoxInput id={id} text={text} completed={completed} key={id} />
-                })
+                <ul className={styles.list}>
+                  {item.tasks.map(({ id, text, completed }) => {
+                    return <TaskBoxInput id={id} text={text} completed={completed} key={id} />
+                  })}
+                </ul>
               ) : (
                 <div> Нет тасок :&#40; </div>
               )}

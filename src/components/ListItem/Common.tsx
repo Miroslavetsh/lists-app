@@ -13,6 +13,7 @@ export type CommonPropTypes<T extends CommonInteractivePropTypes> = T & {
   isHot?: boolean
   onClick?: MouseEventHandler<HTMLLIElement>
   title?: string
+  className?: string
 }
 
 function Common<T extends CommonInteractivePropTypes>(props: CommonPropTypes<T>) {
@@ -38,6 +39,10 @@ function Common<T extends CommonInteractivePropTypes>(props: CommonPropTypes<T>)
       <CommonInteractive children={children} />
     </li>
   )
+}
+
+Common.defaultProps = {
+  className: '',
 }
 
 export default Common
