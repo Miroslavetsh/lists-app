@@ -22,11 +22,7 @@ const App: React.FC = () => {
               activeItemId={activeSidebarItemId}
               setActiveItemId={setActiveSidebarItemId}
             />
-            <AllMain
-              activeItemId={activeSidebarItemId}
-              toDoLists={toDoLists}
-              setToDoLists={setToDoLists}
-            />
+            <AllMain />
           </div>
         }
       />

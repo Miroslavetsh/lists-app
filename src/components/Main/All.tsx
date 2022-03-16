@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 
-import { SidebarPropTypes } from '@components/Sidebar'
 import { TaskBoxInput } from '@components/Input'
 
 import ToDoList from '@models/ToDoList'
@@ -11,16 +10,9 @@ import getApiPath from '@utils/getApiPath'
 
 import styles from './Styles.module.css'
 
-type MainPropTypes = Pick<SidebarPropTypes, 'activeItemId' | 'toDoLists' | 'setToDoLists'>
-
 type ExpandedList = ToDoList & { color: Color; tasks: Array<Task> }
 
-// FIXME: сделать useReducer чтобы не хранить такую кучу состояний
-const Main: React.FC<MainPropTypes> = ({
-  activeItemId: activeSidebarItemId,
-  toDoLists,
-  setToDoLists,
-}) => {
+const Main: React.FC = () => {
   const [expandedLists, setExpandedLists] = useState<Array<ExpandedList>>([])
 
   useEffect(() => {
@@ -34,7 +26,7 @@ const Main: React.FC<MainPropTypes> = ({
       .then(({ data }) => {
         setExpandedLists(data)
       })
-  }, [activeSidebarItemId])
+  }, [])
 
   return (
     <main className={styles.flex}>
