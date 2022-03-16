@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 import { WithIconInteractive } from '@components/Interactive'
@@ -39,7 +40,7 @@ const Sidebar: React.FC<SidebarPropTypes> = ({
     axios.get(getApiPath('colors')).then(({ data }) => {
       setAvailableColors(data)
     })
-  }, [])
+  }, [setToDoLists])
 
   const showAddListPopup = () => {
     setPopupAddListVisible(true)
@@ -60,7 +61,7 @@ const Sidebar: React.FC<SidebarPropTypes> = ({
   return (
     <div className={styles.sidebar}>
       <div className={styles.top}>
-        <a href='/'>
+        <Link to='/'>
           <WithIconInteractive
             active={activeItemId === 0}
             onClick={() => {
@@ -81,7 +82,7 @@ const Sidebar: React.FC<SidebarPropTypes> = ({
             }>
             Все списки
           </WithIconInteractive>
-        </a>
+        </Link>
       </div>
 
       <ul className={styles.mid}>
@@ -98,15 +99,17 @@ const Sidebar: React.FC<SidebarPropTypes> = ({
             }
 
             const ListItem = (
-              <RemovableListItem
-                title={name}
-                color={hex}
-                isHot={isHot}
-                active={id === activeItemId}
-                onClick={() => setActiveItemId(id)}
-                onRemove={onRemove}
-                children={isHot ? comparedName + '🔥' : comparedName}
-              />
+              <Link to={`/lists/${id}`}>
+                <RemovableListItem
+                  title={name}
+                  color={hex}
+                  isHot={isHot}
+                  active={id === activeItemId}
+                  onClick={() => setActiveItemId(id)}
+                  onRemove={onRemove}
+                  children={isHot ? comparedName + '🔥' : comparedName}
+                />
+              </Link>
             )
 
             return <React.Fragment key={id}>{ListItem}</React.Fragment>

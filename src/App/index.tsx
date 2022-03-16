@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
-import Main from '@components/Main'
+import { AllMain, CommonMain } from '@components/Main'
 import Sidebar from '@components/Sidebar'
 
 import ToDoList from '@models/ToDoList'
@@ -10,15 +11,44 @@ const App: React.FC = () => {
   const [toDoLists, setToDoLists] = useState<Array<ToDoList>>([])
 
   return (
-    <div className='page'>
-      <Sidebar
-        toDoLists={toDoLists}
-        setToDoLists={setToDoLists}
-        activeItemId={activeSidebarItemId}
-        setActiveItemId={setActiveSidebarItemId}
+    <Routes>
+      <Route
+        path='/'
+        element={
+          <div className='page'>
+            <Sidebar
+              toDoLists={toDoLists}
+              setToDoLists={setToDoLists}
+              activeItemId={activeSidebarItemId}
+              setActiveItemId={setActiveSidebarItemId}
+            />
+            <AllMain
+              activeItemId={activeSidebarItemId}
+              toDoLists={toDoLists}
+              setToDoLists={setToDoLists}
+            />
+          </div>
+        }
       />
-      <Main activeItemId={activeSidebarItemId} toDoLists={toDoLists} setToDoLists={setToDoLists} />
-    </div>
+      <Route
+        path='/lists/:id'
+        element={
+          <div className='page'>
+            <Sidebar
+              toDoLists={toDoLists}
+              setToDoLists={setToDoLists}
+              activeItemId={activeSidebarItemId}
+              setActiveItemId={setActiveSidebarItemId}
+            />
+            <CommonMain
+              activeItemId={activeSidebarItemId}
+              toDoLists={toDoLists}
+              setToDoLists={setToDoLists}
+            />
+          </div>
+        }
+      />
+    </Routes>
   )
 }
 

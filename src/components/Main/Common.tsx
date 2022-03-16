@@ -53,7 +53,7 @@ const Main: React.FC<MainPropTypes> = ({
       setCurrentListName(name)
       setCurrentListId(id)
     }
-  }, [expandedLists])
+  }, [activeSidebarItemId, expandedLists])
 
   const handleCurrentListNameChange = (e: SyntheticEvent) => {
     setCurrentListName((e.target as HTMLInputElement).value)
@@ -71,11 +71,13 @@ const Main: React.FC<MainPropTypes> = ({
         }),
       ])
 
-      axios.patch(getApiPath(`lists/${currentListId}`), {
-        name: currentListName,
-      }).catch(() => {
-        //TODO: сделать уведомление о том, что не переименовалось
-      })
+      axios
+        .patch(getApiPath(`lists/${currentListId}`), {
+          name: currentListName,
+        })
+        .catch(() => {
+          //TODO: сделать уведомление о том, что не переименовалось
+        })
     }
 
     setIsHeadingEditable(!isHeadingEditable)
@@ -86,9 +88,7 @@ const Main: React.FC<MainPropTypes> = ({
 
   return (
     <main className={styles.main}>
-      {activeSidebarItemId === 0 ? (
-        'Все задачи'
-      ) : (
+      {
         <>
           <h2
             style={{
@@ -143,7 +143,7 @@ const Main: React.FC<MainPropTypes> = ({
             />
           )}
         </>
-      )}
+      }
     </main>
   )
 }
