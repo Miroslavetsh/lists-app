@@ -52,8 +52,8 @@ const Main: React.FC<MainPropTypes> = ({
               </h2>
 
               {item.tasks.length ? (
-                item.tasks.map(({ text, completed, id }) => {
-                  return <TaskBoxInput text={text} completed={completed} key={id} />
+                item.tasks.map(({ id, text, completed }) => {
+                  return <TaskBoxInput id={id} text={text} completed={completed} key={id} />
                 })
               ) : (
                 <div> Нет тасок :&#40; </div>

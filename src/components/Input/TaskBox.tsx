@@ -1,5 +1,6 @@
 import React, { SyntheticEvent, useState } from 'react'
 import ContentEditable from 'react-contenteditable'
+import axios from 'axios'
 
 import { CommonInteractivePropTypes } from '@components/Interactive'
 import { RemovableListItem } from '@components/ListItem'
@@ -7,13 +8,16 @@ import { RemovableListItem } from '@components/ListItem'
 import Task from '@models/Task'
 
 import styles from './Styles.module.css'
+import getApiPath from '@utils/getApiPath'
 
-type TaskBoxPropTypes = Pick<Task, 'text' | 'completed'>
+type TaskBoxPropTypes = Pick<Task, 'id' | 'text' | 'completed'> & {
+  onRemove?: (id: number) => void
+}
 
 // TODO: Добавить debounce для того, чтобы сохранять значение таски
 // учесть issue с стейтом, мб заменить на useRef
 // И учесть невозможность пустого поля
-const TaskBox: React.FC<TaskBoxPropTypes> = ({ text, completed }) => {
+const TaskBox: React.FC<TaskBoxPropTypes> = ({ id, text, completed, onRemove }) => {
   const [taskCompleted, setTaskCompleted] = useState<boolean>(completed)
   const [taskInputText, setTaskInputText] = useState<string>(text)
 
@@ -25,7 +29,16 @@ const TaskBox: React.FC<TaskBoxPropTypes> = ({ text, completed }) => {
     setTaskInputText((e.target as HTMLInputElement).value)
   }
 
-  const removeTask = () => {}
+  const removeTask = () => {
+    axios
+      .delete(getApiPath(`tasks/${id}`))
+      .then(() => {
+        typeof onRemove === 'function' && onRemove(id)
+      })
+      .catch(() => {
+        // TODO: Сделать уведомление о том, что не удалось удалить
+      })
+  }
 
   return (
     <RemovableListItem<CommonInteractivePropTypes>
@@ -62,6 +75,10 @@ const TaskBox: React.FC<TaskBoxPropTypes> = ({ text, completed }) => {
       </label>
     </RemovableListItem>
   )
+}
+
+TaskBox.defaultProps = {
+  onRemove: () => {},
 }
 
 export default TaskBox

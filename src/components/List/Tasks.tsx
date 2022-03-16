@@ -26,12 +26,24 @@ const Tasks: React.FC<TaskPropTypes> = ({ listId, list, setList }) => {
     setList([...list, newTask])
   }
 
+  const onTaskRemoving = (id: number) => {
+    setList(list.filter((task) => task.id !== id))
+  }
+
   return (
     <>
       {list.length ? (
         <ul className={styles.list}>
           {list.map(({ id, text, completed }) => {
-            return <TaskBoxInput text={text} completed={completed} key={id} />
+            return (
+              <TaskBoxInput
+                id={id}
+                text={text}
+                completed={completed}
+                key={id}
+                onRemove={onTaskRemoving}
+              />
+            )
           })}
         </ul>
       ) : (
